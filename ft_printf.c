@@ -13,39 +13,44 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 
-int		print(va_list ap, char const *arg)
+int		find_format(va_list ap, char const *arg, int n)
 {
 	int n;
-	int r;
 
-	n = 0;
-	r = 0;
-	while (arg[n] != '\0')
-	{
-		if (arg[n] == '%')
-		{
-			//r += find_flag(ap, arg, r, n);
-			n++;
-		}
-		else
-		{
-			write(1, arg[n], 1);
-			r++;
-		}
-		n++;
-	}
-	return (r);
+	if (arg[n] == 'd' || arg[n] == 'i')
+		n = ft_putnbr(va_arg(ap, int));
+	return (n);
 }
 
 int		ft_printf(char const *arg, ...)
 {
+	int			n;
 	int			ret;
 	va_list		ap;
 
+	n = 0;
+	ret = 0;
 	va_start(ap, arg);
-
-	ret = print(ap, arg);
-
+	while (arg[n] != '\0')
+	{
+		if (arg[n] == '%' && arg[n + 1] != '%')
+		{
+			n++;
+			ret += find_format(ap, arg, n);
+		}
+		else
+		{
+			write(1, arg[n], 1);
+			n++;
+			ret++;
+		}
+	}
 	va_end(ap);
 	return (ret);
+}
+
+int		main(void)
+{
+	ft_printf("tsb");
+	return (0);
 }
