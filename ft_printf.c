@@ -19,6 +19,12 @@ int		find_format(va_list ap, char const *arg, int n)
 
 	if (arg[n] == 'd' || arg[n] == 'i')
 		ret = ft_putnbr(va_arg(ap, int));
+	else if (arg[n] == 's')
+		ret = ft_putstr(va_arg(ap, char*));
+	else if (arg[n] == 'c')
+		ret = ft_putchar(va_arg(ap, char));
+	else if (arg[n] == 'u')
+		ret = ft_putnbr_unsigned(va_arg(ap, unsigned int));
 	return (n);
 }
 
@@ -52,9 +58,9 @@ int		ft_printf(char const *arg, ...)
 
 int		main(void)
 {
-	int n;
+	char		i;
 
-	n = 85857495;
-	ft_printf("tsb%d\n", n);
+	i = 48;
+	ft_printf("%c\n", i);
 	return (0);
 }

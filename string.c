@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   string.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 13:33:25 by bminner           #+#    #+#             */
-/*   Updated: 2019/11/14 14:12:49 by bminner          ###   ########.fr       */
+/*   Created: 2019/11/19 14:59:23 by bminner           #+#    #+#             */
+/*   Updated: 2019/11/19 14:59:25 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include <unistd.h>
-# include <stdlib.h>
+#include "ft_printf.h"
 
-int			ft_printf(const char *arg, ...);
-int			ft_putnbr (int n);
-int			ft_putstr(char *str);
-int			ft_putchar(char c);
-int			ft_putnbr_unsigned(unsigned int nb);
+int		ft_putchar(char c)
+{
+    write(1, &c, 1);
+    return (1);
+}
 
-#endif
+int		ft_putstr(char *str)
+{
+    int n;
+
+    n = 0;
+    while (str[n] != '\0')
+    {
+        write(1, &str[n], 1);
+        n++;
+    }
+    return (n - 1);
+}
