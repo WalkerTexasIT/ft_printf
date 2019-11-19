@@ -12,37 +12,32 @@
 
 #include "ft_printf.h"
 
-static void		ft_putchar(char c, int fd)
+static void		ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-static int		max(int n, int fd)
+int			ft_putnbr(int n)
 {
-	if (n == -2147483648)
-	{
-		ft_putchar('-', fd);
-		ft_putchar('2', fd);
-		n = 147483648;
-	}
-	return (n);
-}
+	int ret;
 
-void			ft_putnbr_fd(int n, int fd)
-{
-	if (fd < 0)
-		return ;
-	n = max(n, fd);
+	ret = 0;
 	if (n < 0)
 	{
-		ft_putchar('-', fd);
+		ft_putchar('-');
 		n *= -1;
+		ret++;
 	}
-	if (n > 9)
+	if (n == 0)
 	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putchar((n % 10) + 48, fd);
+		ft_putchar('0');
+		ret++;
 	}
-	else
-		ft_putchar(n + 48, fd);
+	while (n > 0)
+	{
+		ft_putchar((n % 10) + 48);
+		n /= 10;
+		ret++;
+	}
+	return (ret);
 }

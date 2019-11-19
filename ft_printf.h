@@ -16,5 +16,6 @@
 # include <stdlib.h>
 
 int			ft_printf(const char *arg, ...);
+int			ft_putnbr (int n);
 
 #endif

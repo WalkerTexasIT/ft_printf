@@ -15,10 +15,10 @@
 
 int		find_format(va_list ap, char const *arg, int n)
 {
-	int n;
+	int ret;
 
 	if (arg[n] == 'd' || arg[n] == 'i')
-		n = ft_putnbr(va_arg(ap, int));
+		ret = ft_putnbr(va_arg(ap, int));
 	return (n);
 }
 
@@ -37,10 +37,11 @@ int		ft_printf(char const *arg, ...)
 		{
 			n++;
 			ret += find_format(ap, arg, n);
+			n++;
 		}
 		else
 		{
-			write(1, arg[n], 1);
+			write(1, &arg[n], 1);
 			n++;
 			ret++;
 		}
@@ -51,6 +52,9 @@ int		ft_printf(char const *arg, ...)
 
 int		main(void)
 {
-	ft_printf("tsb");
+	int n;
+
+	n = 85857495;
+	ft_printf("tsb%d\n", n);
 	return (0);
 }
