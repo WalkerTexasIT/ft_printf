@@ -22,9 +22,13 @@ int		find_format(va_list ap, char const *arg, int n)
 	else if (arg[n] == 's')
 		ret = ft_putstr(va_arg(ap, char*));
 	else if (arg[n] == 'c')
-		ret = ft_putchar(va_arg(ap, char));
+		ret = ft_putchar(va_arg(ap, int));
 	else if (arg[n] == 'u')
 		ret = ft_putnbr_unsigned(va_arg(ap, unsigned int));
+	else if (arg[n] == 'x')
+		ret = convert_hexa(va_arg(ap, unsigned int));
+	else if (arg[n] == 'X')
+		ret = convert_hexa_maj(va_arg(ap, unsigned int));
 	return (n);
 }
 
@@ -61,6 +65,7 @@ int		main(void)
 	char		i;
 
 	i = 48;
-	ft_printf("%c\n", i);
+	ft_printf("%X\n", i);
+	printf("%%\n");
 	return (0);
 }

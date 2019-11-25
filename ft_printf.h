@@ -14,11 +14,14 @@
 # define FT_PRINTF_H
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 int			ft_printf(const char *arg, ...);
 int			ft_putnbr (int n);
 int			ft_putstr(char *str);
 int			ft_putchar(char c);
 int			ft_putnbr_unsigned(unsigned int nb);
+int			convert_hexa(unsigned int nb);
+int			convert_hexa_maj(unsigned int nb);
 
 #endif
