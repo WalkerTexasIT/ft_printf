@@ -58,3 +58,17 @@ int		ft_putnbr_unsigned(unsigned int nb)
 		ret += ft_putchar(nb + 48);
 	return (ret);
 }
+
+int		print_porcent(void)
+{
+	write(1, "%", 1);
+	return (1);
+}
+
+int		aff_pointeur(unsigned long long n)
+{
+	int ret;
+
+	ret = convert_hexa(n);
+	return (ret);
+}

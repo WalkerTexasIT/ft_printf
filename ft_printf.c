@@ -17,6 +17,7 @@ int		find_format(va_list ap, char const *arg, int n)
 {
 	int ret;
 
+	ret = 0;
 	if (arg[n] == 'd' || arg[n] == 'i')
 		ret = ft_putnbr(va_arg(ap, int));
 	else if (arg[n] == 's')
@@ -29,7 +30,11 @@ int		find_format(va_list ap, char const *arg, int n)
 		ret = convert_hexa(va_arg(ap, unsigned int));
 	else if (arg[n] == 'X')
 		ret = convert_hexa_maj(va_arg(ap, unsigned int));
-	return (n);
+	else if (arg[n] == '%')
+		ret = print_porcent();
+	else if (arg[n] == 'p')
+		ret = aff_pointeur(va_arg(ap, unsigned long long));
+	return (ret);
 }
 
 int		ft_printf(char const *arg, ...)
@@ -43,7 +48,7 @@ int		ft_printf(char const *arg, ...)
 	va_start(ap, arg);
 	while (arg[n] != '\0')
 	{
-		if (arg[n] == '%' && arg[n + 1] != '%')
+		if (arg[n] == '%')
 		{
 			n++;
 			ret += find_format(ap, arg, n);
@@ -62,10 +67,10 @@ int		ft_printf(char const *arg, ...)
 
 int		main(void)
 {
-	char		i;
+	int		i;
 
 	i = 48;
-	ft_printf("%X\n", i);
-	printf("%%\n");
+	ft_printf("%p\n", &i);
+	printf("%p\n", &i);
 	return (0);
 }

@@ -23,5 +23,7 @@ int			ft_putchar(char c);
 int			ft_putnbr_unsigned(unsigned int nb);
 int			convert_hexa(unsigned int nb);
 int			convert_hexa_maj(unsigned int nb);
+int			print_porcent(void);
+int			aff_pointeur(unsigned long long n);
 
 #endif
