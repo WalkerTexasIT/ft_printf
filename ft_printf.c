@@ -33,7 +33,7 @@ int		find_format(va_list ap, char const *arg, int n)
 	else if (arg[n] == '%')
 		ret = print_porcent();
 	else if (arg[n] == 'p')
-		ret = aff_pointeur(va_arg(ap, unsigned long long));
+		ret = aff_pointeur(va_arg(ap, unsigned long long), 0);
 	return (ret);
 }
 
@@ -67,7 +67,7 @@ int		ft_printf(char const *arg, ...)
 
 int		main(void)
 {
-	int		i;
+	char		i;
 
 	i = 48;
 	ft_printf("%p\n", &i);

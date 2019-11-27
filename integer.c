@@ -65,10 +65,23 @@ int		print_porcent(void)
 	return (1);
 }
 
-int		aff_pointeur(unsigned long long n)
+int		aff_pointeur(unsigned long long n, int i)
 {
 	int ret;
 
-	ret = convert_hexa(n);
+	ret = 0;
+	if (i == 0)
+	{
+		ft_putchar('0');
+		ft_putchar('x');
+		ret += 2;
+	}
+	if (n > 15)
+	{
+		ret += aff_pointeur((n / 16), 1);
+		ret += ft_puthexa(n % 16);
+	}
+	else
+		ret += ft_puthexa(n);
 	return (ret);
 }

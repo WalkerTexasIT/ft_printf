@@ -24,6 +24,7 @@ int			ft_putnbr_unsigned(unsigned int nb);
 int			convert_hexa(unsigned int nb);
 int			convert_hexa_maj(unsigned int nb);
 int			print_porcent(void);
-int			aff_pointeur(unsigned long long n);
+int			aff_pointeur(unsigned long long n, int i);
+int			ft_puthexa(int n);
 
 #endif
