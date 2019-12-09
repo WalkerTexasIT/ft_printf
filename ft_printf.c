@@ -13,28 +13,40 @@
 #include "ft_printf.h"
 #include <stdarg.h>
 
-int		find_format(va_list ap, char const *arg, int n)
+int		find_format(va_list ap, char const *arg, int *n)
 {
 	int ret;
 
 	ret = 0;
-	if (arg[n] == 'd' || arg[n] == 'i')
+	if (arg[*n] == 'd' || arg[*n] == 'i')
 		ret = ft_putnbr(va_arg(ap, int));
-	else if (arg[n] == 's')
+	else if (arg[*n] == 's')
 		ret = ft_putstr(va_arg(ap, char*));
-	else if (arg[n] == 'c')
+	else if (arg[*n] == 'c')
 		ret = ft_putchar(va_arg(ap, int));
-	else if (arg[n] == 'u')
+	else if (arg[*n] == 'u')
 		ret = ft_putnbr_unsigned(va_arg(ap, unsigned int));
-	else if (arg[n] == 'x')
+	else if (arg[*n] == 'x')
 		ret = convert_hexa(va_arg(ap, unsigned int));
-	else if (arg[n] == 'X')
+	else if (arg[*n] == 'X')
 		ret = convert_hexa_maj(va_arg(ap, unsigned int));
-	else if (arg[n] == '%')
+	else if (arg[*n] == '%')
 		ret = print_porcent();
-	else if (arg[n] == 'p')
+	else if (arg[*n] == 'p')
 		ret = aff_pointeur(va_arg(ap, unsigned long long), 0);
 	return (ret);
+}
+
+int		find_flag(va_list ap, char const *arg, int *n)
+{
+	int ret;
+	int info[4];
+
+	ret = 0;
+	if (arg[*n] == '0')
+		info[1] == 1;
+	else
+		info[1] == 0;
 }
 
 int		ft_printf(char const *arg, ...)
@@ -51,7 +63,7 @@ int		ft_printf(char const *arg, ...)
 		if (arg[n] == '%')
 		{
 			n++;
-			ret += find_format(ap, arg, n);
+			ret += find_format(ap, arg, &n);
 			n++;
 		}
 		else
@@ -67,10 +79,10 @@ int		ft_printf(char const *arg, ...)
 
 int		main(void)
 {
-	char		i;
+	int		i;
 
-	i = 48;
+	i = 34567;
 	ft_printf("%p\n", &i);
-	printf("%p\n", &i);
+	//printf("%010d/\n", i);
 	return (0);
 }
