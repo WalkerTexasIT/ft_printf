@@ -16,6 +16,15 @@
 # include <stdlib.h>
 # include <stdio.h>
 
+typedef struct t_flag s_flag;
+struct s_flag {
+	int		zero;
+	int		moins;
+	int		point;
+	int		star;
+	int 	nbr;
+}
+
 int			ft_printf(const char *arg, ...);
 int			ft_putnbr (int n);
 int			ft_putstr(char *str);

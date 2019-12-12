@@ -15,38 +15,26 @@
 
 int		find_format(va_list ap, char const *arg, int *n)
 {
-	int ret;
+	int dest;
 
-	ret = 0;
+	dest = 0;
 	if (arg[*n] == 'd' || arg[*n] == 'i')
-		ret = ft_putnbr(va_arg(ap, int));
+		dest = ft_putnbr(va_arg(ap, int));
 	else if (arg[*n] == 's')
-		ret = ft_putstr(va_arg(ap, char*));
+		dest = ft_putstr(va_arg(ap, char*));
 	else if (arg[*n] == 'c')
-		ret = ft_putchar(va_arg(ap, int));
+		dest = ft_putchar(va_arg(ap, int));
 	else if (arg[*n] == 'u')
-		ret = ft_putnbr_unsigned(va_arg(ap, unsigned int));
+		dest = ft_putnbr_unsigned(va_arg(ap, unsigned int));
 	else if (arg[*n] == 'x')
-		ret = convert_hexa(va_arg(ap, unsigned int));
+		dest = convert_hexa(va_arg(ap, unsigned int));
 	else if (arg[*n] == 'X')
-		ret = convert_hexa_maj(va_arg(ap, unsigned int));
+		dest = convert_hexa_maj(va_arg(ap, unsigned int));
 	else if (arg[*n] == '%')
-		ret = print_porcent();
+		dest = print_porcent();
 	else if (arg[*n] == 'p')
-		ret = aff_pointeur(va_arg(ap, unsigned long long), 0);
-	return (ret);
-}
-
-int		find_flag(va_list ap, char const *arg, int *n)
-{
-	int ret;
-	int info[4];
-
-	ret = 0;
-	if (arg[*n] == '0')
-		info[1] == 1;
-	else
-		info[1] == 0;
+		dest = aff_pointeur(va_arg(ap, unsigned long long), 0);
+	return (dest);
 }
 
 int		ft_printf(char const *arg, ...)
@@ -79,10 +67,10 @@ int		ft_printf(char const *arg, ...)
 
 int		main(void)
 {
-	int		i;
+	char		*i;
 
-	i = 34567;
-	ft_printf("%p\n", &i);
-	//printf("%010d/\n", i);
+	i = "34567";
+	ft_printf("rghzg%p\n", &i);
+	//printf("%.s/\n", i);
 	return (0);
 }

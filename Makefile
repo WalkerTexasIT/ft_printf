@@ -26,7 +26,7 @@ $(NAME): $(OBJ) ft_printf.h
 
 %.o: %.c
 		$(CC) $(CCFLAGS) -c -o $@ $<
-	
+
 clean:
 		rm -f $(OBJ)
 
