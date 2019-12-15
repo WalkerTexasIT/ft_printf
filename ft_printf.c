@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:41:08 by bminner           #+#    #+#             */
-/*   Updated: 2019/11/14 09:41:09 by bminner          ###   ########.fr       */
+/*   Updated: 2019/12/15 16:51:38 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 
 int		find_format(va_list ap, char const *arg, int *n)
 {
-	int dest;
+	char *dest;
 
-	dest = 0;
 	if (arg[*n] == 'd' || arg[*n] == 'i')
-		dest = ft_putnbr(va_arg(ap, int));
+		dest = ft_itoa(va_arg(ap, int));
 	else if (arg[*n] == 's')
-		dest = ft_putstr(va_arg(ap, char*));
+		dest = va_arg(ap, char*);
 	else if (arg[*n] == 'c')
-		dest = ft_putchar(va_arg(ap, int));
+		dest = ft_char(va_arg(ap, int));
 	else if (arg[*n] == 'u')
-		dest = ft_putnbr_unsigned(va_arg(ap, unsigned int));
+		dest = ft_itoa_unsigned(va_arg(ap, unsigned int));
 	else if (arg[*n] == 'x')
 		dest = convert_hexa(va_arg(ap, unsigned int));
 	else if (arg[*n] == 'X')
@@ -70,7 +69,7 @@ int		main(void)
 	char		*i;
 
 	i = "34567";
-	ft_printf("rghzg%p\n", &i);
-	//printf("%.s/\n", i);
+	//ft_printf("rghzg%p\n", &i);
+	printf("%*.5i/\n", 5, 2555555);
 	return (0);
 }

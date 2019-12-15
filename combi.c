@@ -12,32 +12,29 @@
 
 #include "ft_printf.h"
 
-void	zero(char const *arg, int *n, flag *combi)
-{
-	if (arg[*n] == '0')
-	{
-		combi->zero = 1;
-		*n++;
-	}
-}
-
 int		verif(char const *arg, int *n)
 {
-	
+	char	*list;
+	int		i;
+
+	list = "cspdiuxX%";
+	i = 0;
+	while (list[i] != '\0')
+	{
+		if (arg[*n] == list[i])
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 void	combi(char const *arg, int *n)
 {
 	t_flag combi;
-	int		n;
 
-	n = 0;
 	combi.zero = 0;
 	combi.moins = 0;
 	combi.point = 0;
 	combi.star = 0;
 	combi.nbr = 1;
-	zero(arg, n, &combi);
-	if (verif(arg, n) == 0)
-		n = 1;
 }

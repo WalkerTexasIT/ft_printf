@@ -6,63 +6,32 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 21:18:42 by bminner           #+#    #+#             */
-/*   Updated: 2019/11/18 21:18:44 by bminner          ###   ########.fr       */
+/*   Updated: 2019/12/15 15:42:13 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_putchar(char c)
+char	*ft_putchar(char c)
 {
-	write(1, &c, 1);
-	return (1);
+	char *dest;
+
+	if (!(dest = malloc(sizeof(char))))
+		return (0);
+	dest[0] = c;
+	dest[1] = '\0';
+	return (dest);
 }
 
-int		ft_putnbr(int nb)
+char	*print_porcent(void)
 {
-	int ret;
+	char	*dest;
 
-	ret = 0;
-	if (nb == -2147483648)
-	{
-		ret += ft_putchar('-');
-		ret += ft_putchar('2');
-		nb = 147483648;
-	}
-	if (nb < 0)
-	{
-		ret += ft_putchar('-');
-		nb *= -1;
-	}
-	if (nb > 9)
-	{
-		ret += ft_putnbr(nb / 10);
-		ret += ft_putchar((nb % 10) + 48);
-	}
-	else
-		ret += ft_putchar(nb + 48);
-	return (ret);
-}
-
-int		ft_putnbr_unsigned(unsigned int nb)
-{
-	int ret;
-
-	ret = 0;
-	if (nb > 9)
-	{
-		ret += ft_putnbr(nb / 10);
-		ret += ft_putchar((nb % 10) + 48);
-	}
-	else
-		ret += ft_putchar(nb + 48);
-	return (ret);
-}
-
-int		print_porcent(void)
-{
-	write(1, "%", 1);
-	return (1);
+	if (!(dest = malloc(sizeof(char))))
+		return (0);
+	dest[0] = '%';
+	dest[1] = '\0';
+	return (dest);
 }
 
 int		aff_pointeur(unsigned long long n, int i)
