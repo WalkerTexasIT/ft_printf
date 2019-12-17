@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 21:18:42 by bminner           #+#    #+#             */
-/*   Updated: 2019/12/15 15:42:13 by bminner          ###   ########.fr       */
+/*   Updated: 2019/12/17 14:30:21 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,25 @@ char	*print_porcent(void)
 	return (dest);
 }
 
-int		aff_pointeur(unsigned long long n, int i)
+char	*aff_pointeur(unsigned long long i)
 {
-	int ret;
+	char	*dest;
+	int		len;
 
-	ret = 0;
+	len = ft_lenhexa((long long)i);
+	if (!(dest = (char*)malloc(sizeof(char) * (len + 3))))
+		return (0);
+	len += 2;
+	dest[0] = '0';
+	dest[1] = 'x';
+	dest[len] = '\0';
 	if (i == 0)
+		dest[2] = '0';
+	while (i > 0)
 	{
-		ft_putchar('0');
-		ft_putchar('x');
-		ret += 2;
+		dest[len - 1] = ft_puthexa(i % 16);
+		i /= 16;
+		len--;
 	}
-	if (n > 15)
-	{
-		ret += aff_pointeur((n / 16), 1);
-		ret += ft_puthexa(n % 16);
-	}
-	else
-		ret += ft_puthexa(n);
-	return (ret);
+	return (dest);
 }

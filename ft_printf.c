@@ -6,12 +6,25 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:41:08 by bminner           #+#    #+#             */
-/*   Updated: 2019/12/15 16:51:38 by bminner          ###   ########.fr       */
+/*   Updated: 2019/12/17 15:23:53 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdarg.h>
+
+int		printstring(char *dest)
+{
+	int n;
+
+	n = 0;
+	while (dest[n] != '\0')
+	{
+		write(1, &dest[n], 1);
+		n++;
+	}
+	return (n - 1);
+}
 
 int		find_format(va_list ap, char const *arg, int *n)
 {
@@ -22,18 +35,18 @@ int		find_format(va_list ap, char const *arg, int *n)
 	else if (arg[*n] == 's')
 		dest = va_arg(ap, char*);
 	else if (arg[*n] == 'c')
-		dest = ft_char(va_arg(ap, int));
+		dest = ft_putchar(va_arg(ap, int));
 	else if (arg[*n] == 'u')
 		dest = ft_itoa_unsigned(va_arg(ap, unsigned int));
 	else if (arg[*n] == 'x')
-		dest = convert_hexa(va_arg(ap, unsigned int));
+		dest = ft_hexatoa(va_arg(ap, unsigned int));
 	else if (arg[*n] == 'X')
-		dest = convert_hexa_maj(va_arg(ap, unsigned int));
+		dest = ft_hexatoa_maj(va_arg(ap, unsigned int));
 	else if (arg[*n] == '%')
 		dest = print_porcent();
 	else if (arg[*n] == 'p')
-		dest = aff_pointeur(va_arg(ap, unsigned long long), 0);
-	return (dest);
+		dest = aff_pointeur(va_arg(ap, unsigned long long));
+	return (printstring(dest));
 }
 
 int		ft_printf(char const *arg, ...)
@@ -66,10 +79,10 @@ int		ft_printf(char const *arg, ...)
 
 int		main(void)
 {
-	char		*i;
+	unsigned int		i;
 
-	i = "34567";
-	//ft_printf("rghzg%p\n", &i);
-	printf("%*.5i/\n", 5, 2555555);
+	i = 1351654646;
+	ft_printf("%%\n");
+	printf("%%\n");
 	return (0);
 }
