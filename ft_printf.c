@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:41:08 by bminner           #+#    #+#             */
-/*   Updated: 2019/12/17 15:23:53 by bminner          ###   ########.fr       */
+/*   Updated: 2019/12/19 13:12:55 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ int		printstring(char *dest)
 	return (n - 1);
 }
 
-int		find_format(va_list ap, char const *arg, int *n)
+int		find_format(va_list ap, char const *arg, int *n, flag *combi)
 {
 	char *dest;
 
+	check(ap, arg, n, combi);
 	if (arg[*n] == 'd' || arg[*n] == 'i')
 		dest = ft_itoa(va_arg(ap, int));
 	else if (arg[*n] == 's')
@@ -63,7 +64,7 @@ int		ft_printf(char const *arg, ...)
 		if (arg[n] == '%')
 		{
 			n++;
-			ret += find_format(ap, arg, &n);
+			ret += combi(ap, arg, &n);
 			n++;
 		}
 		else
@@ -82,7 +83,7 @@ int		main(void)
 	unsigned int		i;
 
 	i = 1351654646;
-	ft_printf("%%\n");
-	printf("%%\n");
+	//ft_printf("%%\n");
+	printf("%.*d\n", 10, 2);
 	return (0);
 }

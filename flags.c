@@ -6,60 +6,82 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 13:46:47 by bminner           #+#    #+#             */
-/*   Updated: 2019/12/13 13:46:48 by bminner          ###   ########.fr       */
+/*   Updated: 2019/12/18 17:35:01 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	moins(char const *arg, int *n, flag *combi)
+int		moins(char const *arg, int *n, flag *combi)
 {
-    if (arg[*n] == '-')
-    {
-        combi->moins = 1;
-        *n++;
-    }
+	if (arg[*n] == '-')
+	{
+		combi->moins = 1;
+		*n++;
+		return (1);
+	}
+	return (0);
 }
 
-void	zero(char const *arg, int *n, flag *combi)
+int		zero(char const *arg, int *n, flag *combi)
 {
 	if (arg[*n] == '0')
 	{
 		combi->zero = 0;
 		*n++;
+		return (1);
 	}
+	return (0);
 }
 
-void	point(char const *arg, int *n, flag *combi)
+int		nbr(char const *arg, int *n, flag *combi)
 {
-	if (arg[*n] == '.')
+	int i;
+
+	i = 0;
+	while (arg[*n] >= '1' || arg[*n] <= '9')
 	{
-		combi->point = 1;
+		combi->len *= 10;
+		combi->len += (int)arg[*n];
 		*n++;
+		i = 1;
 	}
+	return (i);
 }
 
-void	star(char const *arg, int *n, flag *combi)
+int		star_pres(va_list ap, char const *arg, int *n, flag *combi)
 {
 	if (arg[*n] == '*')
 	{
-		combi->star = 1;
+		combi->precison = va_arg(ap, int);
 		*n++;
+		return (1);
 	}
+	return (0);
 }
 
-void	nbr(char const *arg, int *n, flag *combi)
+int		star_len(va_list ap, char const *arg, int *n flag *combi)
 {
-	char	*list;
-	int		i;
+	if (arg[*n] == '*')
+	{
+		combi->len = va_arg(ap, int);
+		*n++;
+		return (1);
+	}
+	return (0);
+}
+
+int		nbr_pre(char const *arg, int *n, flag *combi)
+{
+	int i;
 
 	i = 0;
-	list = "123456789";
-	while (list[i] != '\0')
+	while (arg[*n] >= '1' && arg[*n] <= '9')
 	{
-		if (arg[*n] == list[i])
-			break ;
-		i++;
+		combi->precision *= 10;
+		combi->precision += (int)arg[*n];
+		*n++;
+		i = 1;
 	}
-	
+	return (i);
 }
