@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
-int			ft_len(long n)
+int					ft_len(long n)
 {
 	int i;
 

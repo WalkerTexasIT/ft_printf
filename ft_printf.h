@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 13:33:25 by bminner           #+#    #+#             */
-/*   Updated: 2019/12/18 18:11:31 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/06 12:13:04 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <stdarg.h>
 
-typedef struct t_flag s_flag;
-struct s_flag {
+typedef struct s_flag {
 	int		zero;
 	int		moins;
 	int		precision;
 	int 	len;
-};
+}			t_flag;
 
 int			ft_printf(const char *arg, ...);
 char		*ft_putchar(char c);
@@ -34,12 +34,15 @@ char		*ft_hexatoa(unsigned int n);
 char		*ft_hexatoa_maj(unsigned int n);
 int			ft_puthexa(int n);
 int			ft_lenhexa(long long n);
-
-int			moins(char const *arg, int *n, flag *combi);
-int			zero(char const *arg, int *n, flag *combi);
-int			nbr(char const *arg, int *n, flag *combi);
-int			star_pres(va_list ap, char const *arg, int *n, flag *combi);
-int			star_len(va_list ap, char const *arg, int *n, flag *combi);
-int			nbr_pre(char const *arg, int *n, flag *combi);
+int			combi(va_list ap, char const *arg, int *n);
+int			find_format(va_list ap, char const *arg, int *n, t_flag *combi);
+void		check (va_list ap, char const *arg, int *n, t_flag *combi);
+int			moins(char const *arg, int *n, t_flag *combi);
+int			zero(char const *arg, int *n, t_flag *combi);
+int			nbr(char const *arg, int *n, t_flag *combi);
+int			star_pres(va_list ap, char const *arg, int *n, t_flag *combi);
+int			star_len(va_list ap, char const *arg, int *n, t_flag *combi);
+int			nbr_pre(char const *arg, int *n, t_flag *combi);
+int			precision(char const *arg, int *n, t_flag *combi);
 
 #endif

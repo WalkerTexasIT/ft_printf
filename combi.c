@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 11:20:17 by bminner           #+#    #+#             */
-/*   Updated: 2019/12/19 12:07:24 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/06 14:46:07 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,17 @@ int		verif(char const *arg, int *n)
 	return (0);
 }
 
-void	check(va_list ap, char const *arg, int *n)
+void	check(va_list ap, char const *arg, int *n, t_flag *combi)
 {
-	if (	
+	moins(arg, n, combi);
+	if (nbr(arg, n, combi) == 0)
+		star_len(ap, arg, n, combi);
+	if (verif(arg, n) == 1)
+		return ;
+	if (precision(arg, n, combi) == 1)
+		if (nbr_pre(arg, n, combi) == 0)
+			star_pres(ap, arg, n, combi);
+	return ;
 }
 
 int		combi(va_list ap, char const *arg, int *n)
@@ -39,8 +47,7 @@ int		combi(va_list ap, char const *arg, int *n)
 
 	combi.zero = 0;
 	combi.moins = 0;
-	combi.point = 0;
-	combi.star = 0;
-	combi.nbr = 1;
+	combi.precision = 0;
+	combi.len = 0;
 	return (find_format(ap, arg, n, &combi));
 }

@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:41:08 by bminner           #+#    #+#             */
-/*   Updated: 2019/12/19 13:12:55 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/06 09:17:10 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		printstring(char *dest)
 	return (n - 1);
 }
 
-int		find_format(va_list ap, char const *arg, int *n, flag *combi)
+int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 {
 	char *dest;
 
