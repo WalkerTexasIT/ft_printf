@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 16:32:59 by bminner           #+#    #+#             */
-/*   Updated: 2019/12/17 13:45:07 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/09 15:19:18 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int					ft_len(long n)
 	return (i);
 }
 
-char				*ft_itoa(int n)
+char				*ft_itoa(int n, t_flag *combi)
 {
 	char	*dest;
 	int		len;
@@ -55,10 +55,11 @@ char				*ft_itoa(int n)
 		i /= 10;
 		len--;
 	}
+	combi->type = 'd';
 	return (dest);
 }
 
-char				*ft_itoa_unsigned(unsigned int n)
+char				*ft_itoa_unsigned(unsigned int n, t_flag *combi)
 {
 	char	*dest;
 	int		len;
@@ -77,5 +78,6 @@ char				*ft_itoa_unsigned(unsigned int n)
 		i /= 10;
 		len--;
 	}
+	combi->type = 'u';
 	return (dest);
 }

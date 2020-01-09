@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:41:08 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/06 09:17:10 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/09 15:23:25 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,25 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 
 	check(ap, arg, n, combi);
 	if (arg[*n] == 'd' || arg[*n] == 'i')
-		dest = ft_itoa(va_arg(ap, int));
+		dest = ft_itoa(va_arg(ap, int), combi);
 	else if (arg[*n] == 's')
+	{
 		dest = va_arg(ap, char*);
+		combi->type = 's';
+	}
 	else if (arg[*n] == 'c')
-		dest = ft_putchar(va_arg(ap, int));
+		dest = ft_putchar(va_arg(ap, int), combi);
 	else if (arg[*n] == 'u')
-		dest = ft_itoa_unsigned(va_arg(ap, unsigned int));
+		dest = ft_itoa_unsigned(va_arg(ap, unsigned int), combi);
 	else if (arg[*n] == 'x')
-		dest = ft_hexatoa(va_arg(ap, unsigned int));
+		dest = ft_hexatoa(va_arg(ap, unsigned int), combi);
 	else if (arg[*n] == 'X')
-		dest = ft_hexatoa_maj(va_arg(ap, unsigned int));
+		dest = ft_hexatoa_maj(va_arg(ap, unsigned int), combi);
 	else if (arg[*n] == '%')
-		dest = print_porcent();
+		dest = print_porcent(combi);
 	else if (arg[*n] == 'p')
-		dest = aff_pointeur(va_arg(ap, unsigned long long));
+		dest = aff_pointeur(va_arg(ap, unsigned long long), combi);
+	//dest = modif()
 	return (printstring(dest));
 }
 

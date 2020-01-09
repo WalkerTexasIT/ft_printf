@@ -6,13 +6,13 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 21:18:42 by bminner           #+#    #+#             */
-/*   Updated: 2019/12/17 14:30:21 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/09 15:22:53 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*ft_putchar(char c)
+char	*ft_putchar(char c, t_flag *combi)
 {
 	char *dest;
 
@@ -20,10 +20,11 @@ char	*ft_putchar(char c)
 		return (0);
 	dest[0] = c;
 	dest[1] = '\0';
+	combi->type = 'c';
 	return (dest);
 }
 
-char	*print_porcent(void)
+char	*print_porcent(t_flag *combi)
 {
 	char	*dest;
 
@@ -31,10 +32,11 @@ char	*print_porcent(void)
 		return (0);
 	dest[0] = '%';
 	dest[1] = '\0';
+	combi->type = '%';
 	return (dest);
 }
 
-char	*aff_pointeur(unsigned long long i)
+char	*aff_pointeur(unsigned long long i, t_flag *combi)
 {
 	char	*dest;
 	int		len;
@@ -54,5 +56,6 @@ char	*aff_pointeur(unsigned long long i)
 		i /= 16;
 		len--;
 	}
+	combi->type = 'p';
 	return (dest);
 }

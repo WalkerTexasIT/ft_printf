@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 13:38:18 by bminner           #+#    #+#             */
-/*   Updated: 2019/12/17 14:26:50 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/09 15:21:17 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		ft_lenhexa(long long n)
 	return (i);
 }
 
-char	*ft_hexatoa_maj(unsigned int n)
+char	*ft_hexatoa_maj(unsigned int n, t_flag *combi)
 {
 	char	*dest;
 	int		len;
@@ -86,10 +86,11 @@ char	*ft_hexatoa_maj(unsigned int n)
 		i /= 16;
 		len--;
 	}
+	combi->type = 'X';
 	return (dest);
 }
 
-char	*ft_hexatoa(unsigned int n)
+char	*ft_hexatoa(unsigned int n, t_flag *combi)
 {
 	char	*dest;
 	int		len;
@@ -108,5 +109,6 @@ char	*ft_hexatoa(unsigned int n)
 		i /= 16;
 		len--;
 	}
+	combi->type = 'x';
 	return (dest);
 }

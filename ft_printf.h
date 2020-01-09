@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 13:33:25 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/06 12:13:04 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/09 15:03:06 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@ typedef struct s_flag {
 	int		moins;
 	int		precision;
 	int 	len;
+	char	type;
 }			t_flag;
 
 int			ft_printf(const char *arg, ...);
-char		*ft_putchar(char c);
-char		*ft_itoa(int n);
-char		*ft_itoa_unsigned(unsigned int n);
-char		*print_porcent(void);
-char		*aff_pointeur(unsigned long long i);
-char		*ft_hexatoa(unsigned int n);
-char		*ft_hexatoa_maj(unsigned int n);
+char		*ft_putchar(char c, t_flag *combi);
+char		*ft_itoa(int n, t_flag *combi);
+char		*ft_itoa_unsigned(unsigned int n, t_flag *combi);
+char		*print_porcent(t_flag *combi);
+char		*aff_pointeur(unsigned long long i, t_flag *combi);
+char		*ft_hexatoa(unsigned int n, t_flag *combi);
+char		*ft_hexatoa_maj(unsigned int n, t_flag *combi);
 int			ft_puthexa(int n);
 int			ft_lenhexa(long long n);
 int			combi(va_list ap, char const *arg, int *n);
