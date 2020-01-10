@@ -50,7 +50,7 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 		dest = print_porcent(combi);
 	else if (arg[*n] == 'p')
 		dest = aff_pointeur(va_arg(ap, unsigned long long), combi);
-	//dest = modif()
+	//dest = apply_flag(dest, combi);
 	return (printstring(dest));
 }
 

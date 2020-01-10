@@ -12,6 +12,20 @@
 
 #include "ft_printf.h"
 
+char	*apply_flag(char *string, t_flag *combi)
+{
+	char	*dest;
+
+	if (combi->len > ft_strlen(string))
+		if (!(dest = (char*)malloc(sizeof(char) * (combi->len + 1))))
+			return (-1);
+	else
+		if (!(dest = (char*)malloc(sizeof(char) * (ft_strlen(string) + 1))))
+			return (-1);
+	
+	
+}
+
 int		verif(char const *arg, int *n)
 {
 	char	*list;
