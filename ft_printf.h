@@ -45,5 +45,7 @@ int			star_pres(va_list ap, char const *arg, int *n, t_flag *combi);
 int			star_len(va_list ap, char const *arg, int *n, t_flag *combi);
 int			nbr_pre(char const *arg, int *n, t_flag *combi);
 int			precision(char const *arg, int *n, t_flag *combi);
+void		ft_bzero(void *src, size_t n);
+void		ft_bspace(void *src, size_t n);
 
 #endif

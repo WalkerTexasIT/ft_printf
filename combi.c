@@ -15,15 +15,19 @@
 char	*apply_flag(char *string, t_flag *combi)
 {
 	char	*dest;
+	int	i;
 
+	i = 0;
 	if (combi->len > ft_strlen(string))
 		if (!(dest = (char*)malloc(sizeof(char) * (combi->len + 1))))
 			return (-1);
 	else
-		if (!(dest = (char*)malloc(sizeof(char) * (ft_strlen(string) + 1))))
-			return (-1);
-	
-	
+		return (string);
+	bspace(dest);
+	if (combi->moins = 1)
+		dest = debut(dest, string, combi);
+	else
+		fin(dest, string, combi);
 }
 
 int		verif(char const *arg, int *n)

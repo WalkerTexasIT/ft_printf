@@ -13,7 +13,7 @@
 CC = gcc
 
 SRC = ft_printf.c	integer.c	combi.c		flags.c		flags2.c \
-	  hexa.c		ft_itoa.c
+	  hexa.c		ft_itoa.c	ft_bzero.c
 
 all:
 	$(CC) $(SRC)
