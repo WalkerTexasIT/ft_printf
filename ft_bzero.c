@@ -6,13 +6,13 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 13:59:04 by bminner           #+#    #+#             */
-/*   Updated: 2019/10/08 13:59:06 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/13 10:55:50 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_bzero(void *src, size_t n)
+void	ft_bzero(void *src, int n)
 {
 	char *char_src;
 

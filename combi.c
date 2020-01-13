@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 11:20:17 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/06 14:46:07 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/13 11:29:40 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,21 @@
 char	*apply_flag(char *string, t_flag *combi)
 {
 	char	*dest;
-	int	i;
 
-	i = 0;
 	if (combi->len > ft_strlen(string))
-		if (!(dest = (char*)malloc(sizeof(char) * (combi->len + 1))))
-			return (-1);
+		dest = ft_calloc(combi->len);
 	else
 		return (string);
-	bspace(dest);
-	if (combi->moins = 1)
+	if (combi->zero == 0)
+		ft_bspace(dest, combi->len);
+	else
+		ft_bzero(dest, combi->len);
+	if (combi->moins == 1)
 		dest = debut(dest, string, combi);
 	else
-		fin(dest, string, combi);
+		dest = fin(dest, string, combi);
+	free(string);
+	return (dest);
 }
 
 int		verif(char const *arg, int *n)

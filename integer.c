@@ -26,14 +26,8 @@ char	*ft_putchar(char c, t_flag *combi)
 
 char	*print_porcent(t_flag *combi)
 {
-	char	*dest;
-
-	if (!(dest = malloc(sizeof(char))))
-		return (0);
-	dest[0] = '%';
-	dest[1] = '\0';
 	combi->type = '%';
-	return (dest);
+	return (ft_strdup("%"));
 }
 
 char	*aff_pointeur(unsigned long long i, t_flag *combi)

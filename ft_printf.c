@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:41:08 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/09 15:23:25 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/13 11:30:33 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 		dest = print_porcent(combi);
 	else if (arg[*n] == 'p')
 		dest = aff_pointeur(va_arg(ap, unsigned long long), combi);
-	//dest = apply_flag(dest, combi);
+	else
+		printf("error by %c\n", arg[*n]);
+	dest = apply_flag(dest, combi);
 	return (printstring(dest));
 }
 
@@ -87,7 +89,7 @@ int		main(void)
 	unsigned int		i;
 
 	i = 1351654646;
-	//ft_printf("%%\n");
-	printf("%.*d\n", 10, 2);
+	ft_printf("%034.15uyo\n", i);
+	printf("%034.15uyo\n", i);
 	return (0);
 }

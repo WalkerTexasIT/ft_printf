@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 13:33:25 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/09 15:03:06 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/13 11:34:18 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,14 @@ int			star_pres(va_list ap, char const *arg, int *n, t_flag *combi);
 int			star_len(va_list ap, char const *arg, int *n, t_flag *combi);
 int			nbr_pre(char const *arg, int *n, t_flag *combi);
 int			precision(char const *arg, int *n, t_flag *combi);
-void		ft_bzero(void *src, size_t n);
-void		ft_bspace(void *src, size_t n);
+void		ft_bzero(void *src, int n);
+void		ft_bspace(void *src, int n);
+int			ft_strlen(char *src);
+char		*debut(char *lon, char *string, t_flag *combi);
+char		*fin(char *lon, char *string, t_flag *combi);
+int			ft_strlen(char *src);
+void		*ft_calloc(size_t size);
+char		*apply_flag(char *string, t_flag *combi);
+char		*ft_strdup(char *s1);
 
 #endif
