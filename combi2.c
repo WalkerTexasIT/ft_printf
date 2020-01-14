@@ -9,8 +9,9 @@ char	*debut(char *lon, char *string, t_flag *combi)
 	i = 0;
 	n = 0;
 	dest = lon;
-	combi->precision -= ft_strlen(string);
-	while (combi->precision != 0)
+	if (combi->precision > 0)
+		combi->precision -= ft_strlen(string);
+	while (combi->precision > 0)
 	{
 		dest[i] = '0';
 		i++;
@@ -33,14 +34,17 @@ char	*fin(char *lon, char *string, t_flag *combi)
 
 	dest = lon;
 	i = ft_strlen(string);
-	combi->precision -= i;
-	while (i != -1)
+	printf("%d\n", combi->precision);
+	if (combi->precision == 0)
+		combi->precision = ft_strlen(string);
+	while (i != -1 && combi->precision > 0)
 	{
 		dest[combi->len] = string[i];
 		i--;
 		combi->len--;
+		combi->precision--;
 	}
-	while (combi->precision != 0)
+	while (combi->precision > 0)
 	{
 		dest[combi->len] = '0';
 		combi->len--;

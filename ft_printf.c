@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 09:41:08 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/13 11:30:33 by bminner          ###   ########.fr       */
+/*   Updated: 2020/01/14 14:24:39 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,4 @@ int		ft_printf(char const *arg, ...)
 	}
 	va_end(ap);
 	return (ret);
-}
-
-int		main(void)
-{
-	unsigned int		i;
-
-	i = 1351654646;
-	ft_printf("%034.15uyo\n", i);
-	printf("%034.15uyo\n", i);
-	return (0);
 }

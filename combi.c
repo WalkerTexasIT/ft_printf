@@ -16,10 +16,15 @@ char	*apply_flag(char *string, t_flag *combi)
 {
 	char	*dest;
 
-	if (combi->len > ft_strlen(string))
+	if (combi->len > combi->precision)
+		combi->len = combi->precision;
+	if (combi->len >= ft_strlen(string))
 		dest = ft_calloc(combi->len);
 	else
+	{
+		printf("test\n");
 		return (string);
+	}
 	if (combi->zero == 0)
 		ft_bspace(dest, combi->len);
 	else
@@ -28,7 +33,6 @@ char	*apply_flag(char *string, t_flag *combi)
 		dest = debut(dest, string, combi);
 	else
 		dest = fin(dest, string, combi);
-	free(string);
 	return (dest);
 }
 

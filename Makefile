@@ -6,14 +6,43 @@
 #    By: bminner <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/14 13:23:41 by bminner           #+#    #+#              #
-#    Updated: 2020/01/13 11:14:11 by bminner          ###   ########.fr        #
+#    Updated: 2020/01/14 14:26:31 by bminner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
+FLAGS = -Werror -Wall -Wextra
 
-SRC = ft_printf.c	integer.c	combi.c		flags.c		flags2.c \
-	  hexa.c		ft_itoa.c	ft_bzero.c	ft_bspace.c		combi2.c
+NAME = libftprintf.a
 
-all:
-	$(CC) $(SRC)
+SRC = ft_printf.c \
+	integer.c \
+	combi.c \
+	flags.c \
+	flags2.c \
+	hexa.c \
+	ft_itoa.c \
+	ft_bzero.c \
+	ft_bspace.c \
+	combi2.c
+
+OBJ = $(SRC:.c=.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJ) ft_printf.h
+	ar rc $(NAME) $(OBJ)
+
+%.o: %.c
+	$(CC) $(CCFLAGS) -c -o $@ $<
+
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+so: $(OBJ) ft_printf.h
+	$(CC) -shared -fPIC -Wl,-soname,ft_printf.so -o ft_printf.so $(OBJ)
