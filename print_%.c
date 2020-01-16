@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flags2.c                                           :+:      :+:    :+:   */
+/*   print_%.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/06 11:08:27 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/06 11:57:12 by bminner          ###   ########.fr       */
+/*   Created: 2020/01/16 11:24:25 by bminner           #+#    #+#             */
+/*   Updated: 2020/01/16 11:24:26 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		precision(char const *arg, int *n, t_flag *combi)
+char	*print_porcent(t_flag *combi)
 {
-	if (arg[*n] == '.')
-	{
-		combi->precision = 1;
-		(*n)++;
-		return (1);
-	}
-	return (0);
-}
+	char *dest;
 
-int		nbr_pre(char const *arg, int *n, t_flag *combi)
-{
-	int i;
-
-	i = 0;
-	combi->precision = 0;
-	while (arg[*n] >= '0' && arg[*n] <= '9')
-	{
-		combi->precision = combi->precision * 10 + arg[*n] - 48;
-		(*n)++;
-		i = 1;
-	}
-	return (i);
+	if (combi->len > 0)
+		if (combi->zero == 1 && combi->moins == 0)
+			dest = ft_malloc_zero(combi->len);
+		else
+			dest = ft_malloc_space(combi->len);
+	else
+		dest = ft_malloc_space(1);
+	if (combi->moins == 1 || combi->len == 0)
+		dest[0] = '%';
+	else
+		dest[combi->len - 1] = '%';
+	return (dest);
 }

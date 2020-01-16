@@ -1,39 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flags2.c                                           :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/06 11:08:27 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/06 11:57:12 by bminner          ###   ########.fr       */
+/*   Created: 2020/01/16 12:57:16 by bminner           #+#    #+#             */
+/*   Updated: 2020/01/16 12:57:17 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		precision(char const *arg, int *n, t_flag *combi)
+char	*ft_malloc_space(int n)
 {
-	if (arg[*n] == '.')
+	char *dest;
+
+	if (!(dest = (char*)malloc(sizeof(char) * n)))
+		return (0);
+	dest[n] = '\0';
+	n--;
+	while (n != -1)
 	{
-		combi->precision = 1;
-		(*n)++;
-		return (1);
+		dest[n] = ' ';
+		n--;
 	}
-	return (0);
+	return (dest);
 }
 
-int		nbr_pre(char const *arg, int *n, t_flag *combi)
+char	*ft_malloc_zero(int n)
 {
-	int i;
+	char *dest;
 
-	i = 0;
-	combi->precision = 0;
-	while (arg[*n] >= '0' && arg[*n] <= '9')
+	if (!(dest = (char*)malloc(sizeof(char) * n)))
+		return (0);
+	dest[n] = '\0';
+	n--;
+	while (n != -1)
 	{
-		combi->precision = combi->precision * 10 + arg[*n] - 48;
-		(*n)++;
-		i = 1;
+		dest[n] = '0';
+		n--;
 	}
-	return (i);
+	return (dest);
 }

@@ -5,13 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/14 09:41:08 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/14 14:24:39 by bminner          ###   ########.fr       */
+/*   Created: 2020/01/16 09:16:39 by bminner           #+#    #+#             */
+/*   Updated: 2020/01/16 09:16:42 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdarg.h>
+
+void	check(va_list ap, char const *arg, int *n, t_flag *combi)
+{
+	moins(arg, n, combi);
+	zero(arg, n, combi);
+	if (nbr(arg, n, combi) == 0)
+		star_len(ap, arg, n, combi);
+	if (verif(arg, n) == 1)
+		return ;
+	if (precision(arg, n, combi) == 1)
+		if (nbr_pre(arg, n, combi) == 0)
+			star_pres(ap, arg, n, combi);
+	return ;
+}
 
 int		printstring(char *dest)
 {
@@ -31,7 +44,11 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 	char *dest;
 
 	check(ap, arg, n, combi);
-	if (arg[*n] == 'd' || arg[*n] == 'i')
+	if (arg[*n] == '%')
+		dest = print_porcent(combi);
+	else if (arg[*n] == 'c')
+		dest = print_char(combi, va_arg(ap, int));
+	/*if (arg[*n] == 'd' || arg[*n] == 'i')
 		dest = ft_itoa(va_arg(ap, int), combi);
 	else if (arg[*n] == 's')
 	{
@@ -49,11 +66,21 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 	else if (arg[*n] == '%')
 		dest = print_porcent(combi);
 	else if (arg[*n] == 'p')
-		dest = aff_pointeur(va_arg(ap, unsigned long long), combi);
+		dest = aff_pointeur(va_arg(ap, unsigned long long), combi);*/
 	else
 		printf("error by %c\n", arg[*n]);
-	dest = apply_flag(dest, combi);
 	return (printstring(dest));
+}
+
+int		combi(va_list ap, char const *arg, int *n)
+{
+	t_flag	combi;
+
+	combi.zero = 0;
+	combi.moins = 0;
+	combi.precision = 0;
+	combi.len = 0;
+	return (find_format(ap, arg, n, &combi));
 }
 
 int		ft_printf(char const *arg, ...)
@@ -82,4 +109,10 @@ int		ft_printf(char const *arg, ...)
 	}
 	va_end(ap);
 	return (ret);
+}
+
+int		main(void)
+{
+	ft_printf("%-0cend\n", 'd');
+	printf("%-0cend\n", 'd');
 }

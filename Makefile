@@ -16,15 +16,11 @@ FLAGS = -Werror -Wall -Wextra
 NAME = libftprintf.a
 
 SRC = ft_printf.c \
-	integer.c \
 	combi.c \
 	flags.c \
 	flags2.c \
-	hexa.c \
-	ft_itoa.c \
-	ft_bzero.c \
-	ft_bspace.c \
-	combi2.c
+	print_%.c \
+	utils.c
 
 OBJ = $(SRC:.c=.o)
 
