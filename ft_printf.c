@@ -48,6 +48,8 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 		dest = print_porcent(combi);
 	else if (arg[*n] == 'c')
 		dest = print_char(combi, va_arg(ap, int));
+	else if (arg[*n] == 's')
+		dest = print_string(combi, va_arg(ap, char*));
 	/*if (arg[*n] == 'd' || arg[*n] == 'i')
 		dest = ft_itoa(va_arg(ap, int), combi);
 	else if (arg[*n] == 's')
@@ -113,6 +115,6 @@ int		ft_printf(char const *arg, ...)
 
 int		main(void)
 {
-	ft_printf("%-0cend\n", 'd');
-	printf("%-0cend\n", 'd');
+	ft_printf("%send\n", "salut");
+	printf("%send\n", "salut");
 }

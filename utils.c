@@ -43,3 +43,13 @@ char	*ft_malloc_zero(int n)
 	}
 	return (dest);
 }
+
+int		ft_strlen(char *src)
+{
+	int i;
+
+	i = 0;
+	while (src[i] != '\0')
+		i++;
+	return (i);
+}

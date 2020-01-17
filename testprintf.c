@@ -14,6 +14,6 @@
 
 int		main()
 {
-	printf("%2.3s", "salut");
+	printf("%08d", 12345);
 	return (0);
 }

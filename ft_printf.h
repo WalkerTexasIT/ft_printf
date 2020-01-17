@@ -40,5 +40,7 @@ char		*ft_malloc_space(int n);
 char		*print_porcent(t_flag *combi);
 int			verif(char const *arg, int *n);
 char		*print_char(t_flag *combi, char toprint);
+int			ft_strlen(char *src);
+char		*print_string(t_flag *combi, char *toprint);
 
 #endif
