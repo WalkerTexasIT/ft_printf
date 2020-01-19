@@ -14,6 +14,6 @@
 
 int		main()
 {
-	printf("%08d", 12345);
+	printf("%08.x", 12349);
 	return (0);
 }

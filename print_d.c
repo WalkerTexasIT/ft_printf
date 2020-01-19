@@ -12,21 +12,38 @@
 
 #include "ft_printf.h"
 
-char	*case1(t_flag *combi, char *toprint, int case)
+char	*case2(t_flag *combi, char *toprint, int cas)
+{
+	char	*dest;
+	int		i;
+	int		n;
+
+	i = 0;
+	if (cas == 1)
+	{
+		dest = ft_malloc_zero(combi->len);
+		n = combi->len - ft_strlen(toprint);
+		while (toprint[i] != '\0')
+			dest[n++] = toprint[i++];
+	}
+	return (dest);
+}
+
+char	*case1(t_flag *combi, char *toprint, int cas)
 {
 	char	*dest;
 	int		n;
 	int		i;
 
 	i = 0;
-	if (case == 1)
+	if (cas == 1)
 	{
 		n = combi->precision - ft_strlen(toprint);
 		dest = ft_malloc_zero(combi->precision);
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
-	else if (case == 2)
+	else if (cas == 2)
 	{
 		dest = ft_malloc_space(combi->len);
 		n = combi->len - combi->precision;
@@ -95,5 +112,8 @@ char	*print_integer(t_flag *combi, int num)
 	else if (combi->len > combi->precision && combi->precision > ft_strlen(toprint))
 		dest = case1(combi, toprint, 2);
 	else if (combi->len > ft_strlen(toprint) && combi->zero == 1)
-		dest = ft_malloc_zero()
+		dest = case2(combi, toprint, 1);
+	else
+		dest = toprint;
+	return (dest);
 }

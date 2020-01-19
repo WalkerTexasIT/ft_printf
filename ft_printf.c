@@ -50,6 +50,12 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 		dest = print_char(combi, va_arg(ap, int));
 	else if (arg[*n] == 's')
 		dest = print_string(combi, va_arg(ap, char*));
+	else if (arg[*n] == 'd' || arg[*n] == 'i')
+		dest = print_integer(combi, va_arg(ap, int));
+	else if (arg[*n] == 'u')
+		dest = print_unsigned(combi, va_arg(ap, unsigned int));
+	else if (arg[*n] == 'x')
+		dest = print_hexa(combi, va_arg(ap, unsigned int));
 	/*if (arg[*n] == 'd' || arg[*n] == 'i')
 		dest = ft_itoa(va_arg(ap, int), combi);
 	else if (arg[*n] == 's')
@@ -115,6 +121,6 @@ int		ft_printf(char const *arg, ...)
 
 int		main(void)
 {
-	ft_printf("%send\n", "salut");
-	printf("%send\n", "salut");
+	ft_printf("%08uend\n", 12345);
+	printf("%08uend\n", 12345);
 }

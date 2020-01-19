@@ -53,3 +53,18 @@ int		ft_strlen(char *src)
 		i++;
 	return (i);
 }
+
+int		ft_lenhexa(long long n)
+{
+	int i;
+
+	i = 0;
+	if (n == 0)
+		return (1);
+	while (n > 0)
+	{
+		n /= 16;
+		i++;
+	}
+	return (i);
+}

@@ -42,5 +42,8 @@ int			verif(char const *arg, int *n);
 char		*print_char(t_flag *combi, char toprint);
 int			ft_strlen(char *src);
 char		*print_string(t_flag *combi, char *toprint);
+char		*print_integer(t_flag *combi, int num);
+char		*print_unsigned(t_flag *combi, unsigned num);
+int			ft_lenhexa(long long n);
 
 #endif
