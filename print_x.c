@@ -21,9 +21,19 @@ char	*option1(t_flag *combi, char *toprint, int case)
 	i = 0;
 	if (case == 1)
 	{
-		if (combi->zero = 1)
-			dest = ft_malloc_zero(combi->len)
+		if (combi->zero = 1 && combi->precision == 0 && combi->moins == 0)
+			dest = ft_malloc_zero(combi->len);
+		else
+			dest = ft_malloc_space(combi->len);
+		if (combi->moins == 1)
+			dest[i] = toprint[i++];
+		else
+		{
+			n = combi->len - ft_strlen(toprint);
+			dest[n++] = toprint[i++];
+		}
 	}
+	return (dest);
 }
 
 int		ft_puthexa(int n)
@@ -73,6 +83,6 @@ char	*print_hexa(t_flag *combi, unsigned int num)
 	char	*toprint;
 
 	toprint = ft_hexatoa(num);
-	if (combi->len > ft_strlen(toprint) && combi->precision == 0)
+	if (combi->len > ft_strlen(toprint) && combi->precision < combi->len)
 		dest = option1(combi, toprint, 1);
 }
