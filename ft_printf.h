@@ -45,5 +45,14 @@ char		*print_string(t_flag *combi, char *toprint);
 char		*print_integer(t_flag *combi, int num);
 char		*print_unsigned(t_flag *combi, unsigned num);
 int			ft_lenhexa(long long n);
+char		*option3(t_flag *combi, char *toprint, int ca);
+int			ft_puthexa_maj(int n);
+char		*ft_hexatoa(unsigned int n, int k);
+char		*print_hexa_maj(t_flag *combi, unsigned int num);
+char		*print_hexa(t_flag *combi, unsigned int num);
+char		*option1(t_flag *combi, char *toprint);
+char		*option2(t_flag *combi, char *toprint);
+int			ft_puthexa(int n);
+char		*print_pointer(t_flag *combi, unsigned long long i);
 
 #endif

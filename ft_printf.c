@@ -56,25 +56,12 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 		dest = print_unsigned(combi, va_arg(ap, unsigned int));
 	else if (arg[*n] == 'x')
 		dest = print_hexa(combi, va_arg(ap, unsigned int));
-	/*if (arg[*n] == 'd' || arg[*n] == 'i')
-		dest = ft_itoa(va_arg(ap, int), combi);
-	else if (arg[*n] == 's')
-	{
-		dest = va_arg(ap, char*);
-		combi->type = 's';
-	}
-	else if (arg[*n] == 'c')
-		dest = ft_putchar(va_arg(ap, int), combi);
-	else if (arg[*n] == 'u')
-		dest = ft_itoa_unsigned(va_arg(ap, unsigned int), combi);
 	else if (arg[*n] == 'x')
-		dest = ft_hexatoa(va_arg(ap, unsigned int), combi);
+		dest = print_hexa(combi, va_arg(ap, unsigned int));
 	else if (arg[*n] == 'X')
-		dest = ft_hexatoa_maj(va_arg(ap, unsigned int), combi);
-	else if (arg[*n] == '%')
-		dest = print_porcent(combi);
+		dest = print_hexa_maj(combi, va_arg(ap, unsigned int));
 	else if (arg[*n] == 'p')
-		dest = aff_pointeur(va_arg(ap, unsigned long long), combi);*/
+		dest = print_pointer(combi, va_arg(ap, unsigned long long));
 	else
 		printf("error by %c\n", arg[*n]);
 	return (printstring(dest));
@@ -117,10 +104,4 @@ int		ft_printf(char const *arg, ...)
 	}
 	va_end(ap);
 	return (ret);
-}
-
-int		main(void)
-{
-	ft_printf("%08uend\n", 12345);
-	printf("%08uend\n", 12345);
 }

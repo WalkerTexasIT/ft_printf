@@ -20,6 +20,13 @@ SRC = ft_printf.c \
 	flags.c \
 	flags2.c \
 	print_%.c \
+	print_bigx.c \
+	print_c.c \
+	print_d.c \
+	print_p.c \
+	print_s.c \
+	print_u.c \
+	print_x.c \
 	utils.c
 
 OBJ = $(SRC:.c=.o)

@@ -10,4 +10,60 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 
+char	*first(t_flag *combi, char *toprint)
+{
+	char	*dest;
+	int		i;
+	int		n;
+
+	i = 0;
+	dest = ft_malloc_space(combi->len);
+	if (combi->moins == 1)
+		while (toprint[i] != '\0')
+			dest[i] = toprint[i++];
+	else
+	{
+		n = combi->len - ft_strlen(toprint);
+		while (toprint[i] != '\0')
+			dest[n++] = toprint[i++];
+	}
+	return (dest);
+}
+
+char	*ft_pointertoa(unsigned long long i)
+{
+	char	*dest;
+	int		len;
+
+	len = ft_lenhexa((long long)i);
+	if (!(dest = (char*)malloc(sizeof(char) * (len + 3))))
+		return (0);
+	len += 2;
+	dest[0] = '0';
+	dest[1] = 'x';
+	dest[len] = '\0';
+	if (i == 0)
+		dest[2] = '0';
+	while (i > 0)
+	{
+		dest[len - 1] = ft_puthexa(i % 16);
+		i /= 16;
+		len--;
+	}
+	return (dest);
+}
+
+char	*print_pointer(t_flag *combi, unsigned long long i)
+{
+	char *dest;
+	char *toprint;
+
+	toprint = ft_pointertoa(i);
+	if (combi->len > ft_strlen(toprint))
+		dest = first(combi, toprint);
+	else
+		return (toprint);
+	return (dest);
+}

@@ -14,6 +14,6 @@
 
 int		main()
 {
-	printf("%8.8x", 12349);
+	printf("%--43.162s" ,"aXSueb\ffrp\\5/EQFW");
 	return (0);
 }
