@@ -14,6 +14,6 @@
 
 int		main()
 {
-	printf("%08x", 12349);
+	printf("%8.8x", 12349);
 	return (0);
 }

@@ -21,6 +21,7 @@ char	*option1(t_flag *combi, char *toprint, int case)
 	i = 0;
 	if (case == 1)
 	{
+		n = combi->len - ft_strlen(toprint);
 		if (combi->zero = 1 && combi->precision == 0 && combi->moins == 0)
 			dest = ft_malloc_zero(combi->len);
 		else
@@ -28,11 +29,10 @@ char	*option1(t_flag *combi, char *toprint, int case)
 		if (combi->moins == 1)
 			dest[i] = toprint[i++];
 		else
-		{
-			n = combi->len - ft_strlen(toprint);
-			dest[n++] = toprint[i++];
-		}
+			while (toprint[i] != '\0')
+				dest[n++] = toprint[i++];
 	}
+	if (case == 2)
 	return (dest);
 }
 
@@ -83,6 +83,8 @@ char	*print_hexa(t_flag *combi, unsigned int num)
 	char	*toprint;
 
 	toprint = ft_hexatoa(num);
-	if (combi->len > ft_strlen(toprint) && combi->precision < combi->len)
+	if (combi->len > combi->precision && combi->precision > ft_strlen(toprint))
+		dest = option1(combi, toprint, 2);
+	else if (combi->len > ft_strlen(toprint) && combi->precision == 0)
 		dest = option1(combi, toprint, 1);
 }
