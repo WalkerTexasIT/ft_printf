@@ -47,12 +47,16 @@ char	*option1(t_flag *combi, char *toprint)
 
 	i = 0;
 	n = combi->len - ft_strlen(toprint);
-	if (combi->zero = 1 && combi->precision == 0 && combi->moins == 0)
+	if (combi->zero == 1 && combi->precision == 0 && combi->moins == 0)
 		dest = ft_malloc_zero(combi->len);
 	else
 		dest = ft_malloc_space(combi->len);
 	if (combi->moins == 1)
-		dest[i] = toprint[i++];
+		while (toprint[i] != '\0')
+		{
+			dest[i] = toprint[i];
+			i++;
+		}
 	else
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];

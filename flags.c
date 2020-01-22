@@ -14,11 +14,10 @@
 
 int		moins(char const *arg, int *n, t_flag *combi)
 {
-	if (arg[*n] == '-')
+	while (arg[*n] == '-')
 	{
 		combi->moins = 1;
 		(*n)++;
-		return (1);
 	}
 	return (0);
 }
@@ -66,6 +65,11 @@ int		star_len(va_list ap, char const *arg, int *n, t_flag *combi)
 	{
 		combi->len = va_arg(ap, int);
 		(*n)++;
+		if (combi->len < 0)
+		{
+			combi->moins = 1;
+			combi->len *= -1;
+		}
 		return (1);
 	}
 	return (0);

@@ -17,12 +17,13 @@
 # include <stdio.h>
 # include <stdarg.h>
 
-typedef struct s_flag {
+typedef struct	s_flag {
 	int		zero;
 	int		moins;
 	int		precision;
 	int 	len;
-}			t_flag;
+	int		negatif;
+}				t_flag;
 
 int			ft_printf(const char *arg, ...);
 int			combi(va_list ap, char const *arg, int *n);

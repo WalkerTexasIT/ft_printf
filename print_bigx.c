@@ -26,6 +26,13 @@ char	*option3(t_flag *combi, char *toprint, int ca)
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
+	if (ca == 2)
+	{
+		dest = ft_malloc_zero(combi->precision);
+		n = combi->precision - ft_strlen(toprint);
+		while (toprint[i] != '\0')
+			dest[n++] = toprint[i++];
+	}
 	return (dest);
 }
 
@@ -60,6 +67,8 @@ char	*print_hexa_maj(t_flag *combi, unsigned int num)
 		dest = option3(combi, toprint, 1);
 	else if (combi->len > ft_strlen(toprint) && combi->precision <= ft_strlen(toprint))
 		dest = option1(combi, toprint);
+	else if (combi->precision > ft_strlen(toprint))
+		dest = option3(combi, toprint, 2);
 	else
 		return (toprint);
 	return (dest);

@@ -22,7 +22,10 @@ char	*first(t_flag *combi, char *toprint)
 	dest = ft_malloc_space(combi->len);
 	if (combi->moins == 1)
 		while (toprint[i] != '\0')
-			dest[i] = toprint[i++];
+		{
+			dest[i] = toprint[i];
+			i++;
+		}
 	else
 	{
 		n = combi->len - ft_strlen(toprint);
@@ -32,12 +35,27 @@ char	*first(t_flag *combi, char *toprint)
 	return (dest);
 }
 
+int		ft_lenpointer(unsigned long long n)
+{
+	int i;
+
+	i = 0;
+	if (n == 0)
+		return (1);
+	while (n > 0)
+	{
+		n /= 16;
+		i++;
+	}
+	return (i);
+}
+
 char	*ft_pointertoa(unsigned long long i)
 {
 	char	*dest;
 	int		len;
 
-	len = ft_lenhexa((long long)i);
+	len = ft_lenpointer(i);
 	if (!(dest = (char*)malloc(sizeof(char) * (len + 3))))
 		return (0);
 	len += 2;
