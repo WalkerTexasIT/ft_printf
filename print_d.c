@@ -66,21 +66,18 @@ char	*print_integer(t_flag *combi, int num)
 	int		n;
 
 	i = 0;
-	if (num < 0)
-	{
-		combi->negatif = 1;
-		num *= -1;
-	}
 	toprint = ft_itoa(num);
-	if (combi->len > ft_strlen(toprint) || combi->precision > ft_strlen(toprint))
+	if (combi->precision == 0)
+		dest = ft_malloc_space(combi->len);
+	else if (combi->len > ft_strlen(toprint) || combi->precision > ft_strlen(toprint))
 	{
 		if (combi->precision > combi->len && combi->precision > ft_strlen(toprint))
 		{
-			if (combi->negatif == 1)
+			if (toprint[0] == '-')
 			{
 				dest = ft_malloc_zero(combi->precision + 1);
-				dest[0] = '-';
-				n = combi->precision - ft_strlen(toprint) + 1;
+				n = combi->precision - ft_strlen(toprint) + 2;
+				dest[0] = toprint[i++];
 				while (toprint[i] != '\0')
 					dest[n++] = toprint[i++];
 			}
@@ -98,20 +95,28 @@ char	*print_integer(t_flag *combi, int num)
 			if (combi->moins == 1)
 			{
 				n = 0;
-				if (combi->negatif == 1)
-					dest[n++] = '-';
-				while (n <= (combi->precision - ft_strlen(toprint)))
-					dest[n++] = '0';
+				if (toprint[0] == '-')
+					dest[n++] = toprint[i++];
+				if (toprint[0] == '-')
+					while (n <= (combi->precision - ft_strlen(toprint) + 1))
+						dest[n++] = '0';
+				else
+					while (n < (combi->precision - ft_strlen(toprint)))
+						dest[n++] = '0';
 				while (toprint[i] != '\0')
 					dest[n++] = toprint[i++];
 			}
 			else
 			{
 				n = combi->len - combi->precision;
-				if (combi->negatif == 1)
-					dest[n - 1] = '-';
-				while (n <= (combi->precision - ft_strlen(toprint)))
-					dest[n++] = '0';
+				if (toprint[0] == '-')
+					dest[n - 1] = toprint[i++];
+				if (toprint[0] != '-')
+					while (n < (combi->len - ft_strlen(toprint)))
+						dest[n++] = '0';
+				else
+					while (n <= (combi->len - ft_strlen(toprint)))
+						dest[n++] = '0';
 				while (toprint[i] != '\0')
 					dest[n++] = toprint[i++];
 			}
@@ -122,23 +127,54 @@ char	*print_integer(t_flag *combi, int num)
 			if (combi->moins == 1)
 			{
 				n = 0;
-				if (combi->negatif == 1)
-					dest[n++] = '-';
+				if (toprint[0] == '-')
+					dest[n++] = toprint[i++];
 				while (toprint[i] != '\0')
 					dest[n++] = toprint[i++];
 			}
 			else
 			{
-				if (combi->negatif == 1)
-					dest[combi->len - ft_strlen(toprint) - 1] = '-';
 				n = combi->len - ft_strlen(toprint);
+				if (toprint[0] == '-')
+					dest[n++] = toprint[i++];
 				while (toprint[i] != '\0')
 					dest[n++] = toprint[i++];
+			}
+		}
+		else if (combi->len > ft_strlen(toprint))
+		{
+			if (combi->moins == 1)
+			{
+				n = 0;
+				dest = ft_malloc_space(combi->len);
+				while (toprint[i] != '\0')
+					dest[n++] = toprint[i++];
+			}
+			else
+			{
+				if (combi->zero == 1)
+				{
+					dest = ft_malloc_zero(combi->len);
+					n = combi->len - ft_strlen(toprint);
+					if (toprint[0] == '-')
+					{
+						dest[0] = toprint[i++];
+						n++;
+					}
+					while (toprint[i] != '\0')
+						dest[n++] = toprint[i++];
+				}
+				else
+				{
+					dest = ft_malloc_space(combi->len);
+					n = combi->len - ft_strlen(toprint);
+					while (toprint[i] != '\0')
+						dest[n++] = toprint[i++];
+				}
 			}
 		}
 	}
 	else
 		return (toprint);
-
 	return (dest);
 }

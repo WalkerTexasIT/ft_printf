@@ -16,6 +16,7 @@ void	check(va_list ap, char const *arg, int *n, t_flag *combi)
 {
 	moins(arg, n, combi);
 	zero(arg, n, combi);
+	moins(arg, n, combi);
 	if (nbr(arg, n, combi) == 0)
 		star_len(ap, arg, n, combi);
 	if (verif(arg, n) == 1)

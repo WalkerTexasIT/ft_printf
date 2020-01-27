@@ -82,7 +82,7 @@ char	*print_string(t_flag *combi, char *toprint)
 		dest = printminlen(combi, toprint);
 	else if (combi->len > ft_strlen(toprint))
 		dest = printlen(combi, toprint);
-	else if (combi->len > combi->precision)
+	else if (combi->len > combi->precision && combi->precision != -1)
 	{
 		dest = ft_malloc_space(combi->len);
 		if (combi->moins == 1)
