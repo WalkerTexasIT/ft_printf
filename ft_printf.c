@@ -21,7 +21,7 @@ void	check(va_list ap, char const *arg, int *n, t_flag *combi)
 	if (verif(arg, n) == 1)
 		return ;
 	if (precision(arg, n, combi) == 1)
-		if (nbr_pre(arg, n, combi) == 0)
+		if (nbr_pre(arg, n, combi) == 0 && arg[*n] == '*')
 			star_pres(ap, arg, n, combi);
 	return ;
 }
@@ -73,7 +73,7 @@ int		combi(va_list ap, char const *arg, int *n)
 
 	combi.zero = 0;
 	combi.moins = 0;
-	combi.precision = 0;
+	combi.precision = -1;
 	combi.len = 0;
 	combi.negatif = 0;
 	return (find_format(ap, arg, n, &combi));

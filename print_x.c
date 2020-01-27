@@ -47,7 +47,7 @@ char	*option1(t_flag *combi, char *toprint)
 
 	i = 0;
 	n = combi->len - ft_strlen(toprint);
-	if (combi->zero == 1 && combi->precision == 0 && combi->moins == 0)
+	if (combi->zero == 1 && combi->precision == -1 && combi->moins == 0)
 		dest = ft_malloc_zero(combi->len);
 	else
 		dest = ft_malloc_space(combi->len);
@@ -115,7 +115,7 @@ char	*print_hexa(t_flag *combi, unsigned int num)
 	toprint = ft_hexatoa(num, 1);
 	if (combi->len > combi->precision && combi->precision > ft_strlen(toprint))
 		dest = option2(combi, toprint);
-	else if (combi->len > ft_strlen(toprint) && combi->moins == 1 && combi->precision == 0)
+	else if (combi->len > ft_strlen(toprint) && combi->moins == 1 && combi->precision == -1)
 		dest = option3(combi, toprint, 1);
 	else if (combi->len > ft_strlen(toprint) && combi->precision <= ft_strlen(toprint))
 		dest = option1(combi, toprint);

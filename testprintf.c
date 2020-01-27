@@ -14,9 +14,10 @@
 
 int		main()
 {
-	printf("%s\n", "%0155.7d%--125.28d ,-591327463,-154910566");
-	ft_printf("|%0155.7d|\n|%--125.28d|\n\n" ,-591327463,-154910566);
-	printf("|%0155.7d|\n|%--125.28d|\n" ,-591327463,-154910566);
+	// fait
+	printf("%s\n", "%7.5s, bombastic");
+	ft_printf("|%7.5s|\n\n" ,"bombastic");
+	printf("|%7.5s|\n" ,"bombastic");
 	//printf("\n|%5.3d|\n\n", -11);
 	return (0);
 }

@@ -63,9 +63,11 @@ char	*print_string(t_flag *combi, char *toprint)
 {
 	char	*dest;
 	int		i;
+	int		n;
 
 	i = 0;
-	if (combi->precision != 0 && combi->precision >= combi->len && combi->precision <= ft_strlen(toprint))
+	n = 0;
+	if (combi->precision != -1 && combi->precision >= combi->len && combi->precision <= ft_strlen(toprint))
 	{
 		dest = ft_malloc_space(combi->precision);
 		while (i < combi->precision)
@@ -80,6 +82,19 @@ char	*print_string(t_flag *combi, char *toprint)
 		dest = printminlen(combi, toprint);
 	else if (combi->len > ft_strlen(toprint))
 		dest = printlen(combi, toprint);
+	else if (combi->len > combi->precision)
+	{
+		dest = ft_malloc_space(combi->len);
+		if (combi->moins == 1)
+			while (toprint[i] != '\0' && i < combi->precision)
+				dest[n++] = toprint[i++];
+		else
+		{
+			n = combi->len - combi->precision;
+			while (toprint[i] != '\0' && n < combi->len)
+				dest[n++] = toprint[i++];
+		}
+	}
 	else
 		dest = toprint;
 	return (dest);

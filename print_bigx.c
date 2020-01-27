@@ -63,7 +63,7 @@ char	*print_hexa_maj(t_flag *combi, unsigned int num)
 	toprint = ft_hexatoa(num, 2);
 	if (combi->len > combi->precision && combi->precision > ft_strlen(toprint))
 		dest = option2(combi, toprint);
-	else if (combi->len > ft_strlen(toprint) && combi->moins == 1 && combi->precision == 0)
+	else if (combi->len > ft_strlen(toprint) && combi->moins == 1 && combi->precision == -1)
 		dest = option3(combi, toprint, 1);
 	else if (combi->len > ft_strlen(toprint) && combi->precision <= ft_strlen(toprint))
 		dest = option1(combi, toprint);

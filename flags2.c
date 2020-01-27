@@ -16,7 +16,7 @@ int		precision(char const *arg, int *n, t_flag *combi)
 {
 	if (arg[*n] == '.')
 	{
-		combi->precision = 1;
+		combi->precision = -2;
 		(*n)++;
 		return (1);
 	}
