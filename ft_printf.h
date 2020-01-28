@@ -22,7 +22,6 @@ typedef struct	s_flag {
 	int		moins;
 	int		precision;
 	int 	len;
-	int		negatif;
 }				t_flag;
 
 int			ft_printf(const char *arg, ...);

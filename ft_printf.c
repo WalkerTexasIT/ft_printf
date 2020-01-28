@@ -76,7 +76,6 @@ int		combi(va_list ap, char const *arg, int *n)
 	combi.moins = 0;
 	combi.precision = -1;
 	combi.len = 0;
-	combi.negatif = 0;
 	return (find_format(ap, arg, n, &combi));
 }
 

@@ -15,8 +15,8 @@
 int		main()
 {
 	//printf("%s\n", "%7.5s, bombastic");
-	ft_printf("|%5.0d|\n\n" , 0);
-	printf("|%5.0d|\n" , 0);
-	//ft_printf("\n|%8.3d|\n\n", 8375);
+	//ft_printf("|%7.5s|\n\n" , "yolo");
+	//printf("|%7u|\n\n", 33);
+	ft_printf("%10.1d", -55);
 	return (0);
 }

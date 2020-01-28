@@ -24,12 +24,10 @@ int		moins(char const *arg, int *n, t_flag *combi)
 
 int		zero(char const *arg, int *n, t_flag *combi)
 {
-	if (arg[*n] == '0')
+	while (arg[*n] == '0')
 	{
-		if (combi->moins == 0)
-			combi->zero = 1;
+		combi->zero = 1;
 		(*n)++;
-		return (1);
 	}
 	return (0);
 }
