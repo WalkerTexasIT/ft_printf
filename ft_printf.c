@@ -45,6 +45,11 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 	char *dest;
 
 	check(ap, arg, n, combi);
+	if (verif(arg, n) == 0)
+	{
+		(*n)--;
+		return (0);
+	}
 	if (arg[*n] == '%')
 		dest = print_porcent(combi);
 	else if (arg[*n] == 'c')
@@ -56,15 +61,11 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 	else if (arg[*n] == 'u')
 		dest = print_unsigned(combi, va_arg(ap, unsigned int));
 	else if (arg[*n] == 'x')
-		dest = print_hexa(combi, va_arg(ap, unsigned int));
-	else if (arg[*n] == 'x')
-		dest = print_hexa(combi, va_arg(ap, unsigned int));
+		dest = print_hexa(combi, va_arg(ap, unsigned int), 1);
 	else if (arg[*n] == 'X')
-		dest = print_hexa_maj(combi, va_arg(ap, unsigned int));
+		dest = print_hexa(combi, va_arg(ap, unsigned int), 2);
 	else if (arg[*n] == 'p')
 		dest = print_pointer(combi, va_arg(ap, unsigned long long));
-	else
-		printf("error by %c\n", arg[*n]);
 	return (printstring(dest));
 }
 

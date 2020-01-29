@@ -12,57 +12,6 @@
 
 #include "ft_printf.h"
 
-char	*option2(t_flag *combi, char *toprint)
-{
-	char	*dest;
-	int		i;
-	int		n;
-
-	i = 0;
-	dest = ft_malloc_space(combi->len);
-	if (combi->moins == 1)
-	{
-		n = 0;
-		while (n < (combi->precision - ft_strlen(toprint)))
-			dest[n++] = '0';
-		while (toprint[i] != '\0')
-			dest[n++] = toprint[i++];
-	}
-	else
-	{
-		n = combi->len - combi->precision;
-		while (n < (combi->len - ft_strlen(toprint)))
-			dest[n++] = '0';
-		while (toprint[i] != '\0')
-			dest[n++] = toprint[i++];
-	}
-	return (dest);
-}
-
-char	*option1(t_flag *combi, char *toprint)
-{
-	char	*dest;
-	int		i;
-	int		n;
-
-	i = 0;
-	n = combi->len - ft_strlen(toprint);
-	if (combi->zero == 1 && combi->precision == -1 && combi->moins == 0)
-		dest = ft_malloc_zero(combi->len);
-	else
-		dest = ft_malloc_space(combi->len);
-	if (combi->moins == 1)
-		while (toprint[i] != '\0')
-		{
-			dest[i] = toprint[i];
-			i++;
-		}
-	else
-		while (toprint[i] != '\0')
-			dest[n++] = toprint[i++];
-	return (dest);
-}
-
 int		ft_puthexa(int n)
 {
 	if (0 <= n && n <= 9)
@@ -107,18 +56,76 @@ char	*ft_hexatoa(unsigned int n, int k)
 	return (dest);
 }
 
-char	*print_hexa(t_flag *combi, unsigned int num)
+char	*print_hexa(t_flag *combi, unsigned int num, int maj)
 {
 	char	*dest;
 	char	*toprint;
+	int		i;
+	int		n;
 
-	toprint = ft_hexatoa(num, 1);
+	i = 0;
+	toprint = ft_hexatoa(num, maj);
+	if (combi->precision == 0 || combi->precision == -2)
+		toprint[0] = '\0';
 	if (combi->len > combi->precision && combi->precision > ft_strlen(toprint))
-		dest = option2(combi, toprint);
+	{
+		// option 2, 1
+		dest = ft_malloc_space(combi->len);
+		if (combi->moins == 1)
+		{
+			n = 0;
+			while (n < (combi->precision - ft_strlen(toprint)))
+				dest[n++] = '0';
+			while (toprint[i] != '\0')
+				dest[n++] = toprint[i++];
+		}
+		else
+		{
+			n = combi->len - combi->precision;
+			while (n < (combi->len - ft_strlen(toprint)))
+				dest[n++] = '0';
+			while (toprint[i] != '\0')
+				dest[n++] = toprint[i++];
+		}
+	}
+	else if (combi->precision > ft_strlen(toprint))
+	{
+		dest = ft_malloc_zero(combi->precision);
+		n = combi->precision - ft_strlen(toprint);
+		while (toprint[i] != '\0')
+			dest[n++] = toprint[i++];
+	}
+	else if (combi->len > ft_strlen(toprint) && combi->zero == 1 && combi->precision == -1)
+	{
+		dest = ft_malloc_zero(combi->len);
+		n = combi->len - ft_strlen(toprint);
+		while (toprint[i] != '\0')
+			dest[n++] = toprint[i++];
+	}
 	else if (combi->len > ft_strlen(toprint) && combi->moins == 1 && combi->precision == -1)
-		dest = option3(combi, toprint, 1);
+	{
+		dest = ft_malloc_space(combi->len);
+		n = 0;
+		while (toprint[i] != '\0')
+			dest[n++] = toprint[i++];
+	}
 	else if (combi->len > ft_strlen(toprint) && combi->precision <= ft_strlen(toprint))
-		dest = option1(combi, toprint);
+	{
+		n = combi->len - ft_strlen(toprint);
+		if (combi->zero == 1 && combi->precision == -1 && combi->moins == 0)
+			dest = ft_malloc_zero(combi->len);
+		else
+			dest = ft_malloc_space(combi->len);
+		if (combi->moins == 1)
+			while (toprint[i] != '\0')
+			{
+				dest[i] = toprint[i];
+				i++;
+			}
+		else
+			while (toprint[i] != '\0')
+				dest[n++] = toprint[i++];
+	}
 	else
 		return (toprint);
 	return (dest);

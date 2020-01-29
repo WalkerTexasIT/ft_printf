@@ -94,7 +94,10 @@ char	*print_string(t_flag *combi, char *toprint)
 		dest = printminlen(combi, toprint);
 	else if (combi->len > combi->precision && combi->precision != -1)
 	{
-		dest = ft_malloc_space(combi->len);
+		if (combi->zero == 0)
+			dest = ft_malloc_space(combi->len);
+		else
+			dest = ft_malloc_zero(combi->len);
 		if (combi->moins == 1)
 			while (toprint[i] != '\0' && i < combi->precision)
 				dest[n++] = toprint[i++];
