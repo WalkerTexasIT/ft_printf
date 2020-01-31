@@ -67,7 +67,9 @@ char	*print_integer(t_flag *combi, int num)
 
 	i = 0;
 	toprint = ft_itoa(num);
-	if (combi->precision == 0)
+	if (combi->precision <= 0 && toprint[0] != '0')
+		combi->precision = -1;
+	if (toprint[0] == '0' && combi->precision == 0)
 		dest = ft_malloc_space(combi->len);
 	else if (combi->len > ft_strlen(toprint) || combi->precision > ft_strlen(toprint))
 	{
@@ -89,7 +91,7 @@ char	*print_integer(t_flag *combi, int num)
 					dest[n++] = toprint[i++];
 			}
 		}
-		else if (combi->len > combi->precision && combi->precision > ft_strlen(toprint))
+		else if (combi->len > combi->precision && combi->precision >= ft_strlen(toprint))
 		{
 			dest = ft_malloc_space(combi->len);
 			if (combi->moins == 1)

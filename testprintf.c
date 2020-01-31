@@ -15,8 +15,10 @@
 int		main()
 {
 	//printf("%s\n", "%7.5s, bombastic");
-	//ft_printf("%");
-	ft_printf("%04.3s%-7.4s", "hello", "world");
-	//ft_printf("%10.1d", -55);
+	// ft_printf("{%3c}\n", 0);
+	// write(1, "\0", 1);
+	// printf("\n{%3c}", 0);
+	ft_printf("{%0-20u}\n", 1024u);
+	printf("{%0-20u}", 1024u);
 	return (0);
 }

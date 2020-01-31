@@ -114,9 +114,11 @@ char	*print_unsigned(t_flag *combi, unsigned num)
 
 	i = 0;
 	toprint = ft_uitoa(num);
-	if (combi->precision == 0 || combi->precision == -2)
-		toprint[0] = '\0';
-	if (combi->precision > combi->len && combi->precision > ft_strlen(toprint))
+	if (combi->precision <= 0 && toprint[0] != '0')
+		combi->precision = -1;
+	if (toprint[0] == '0' && combi->precision == 0)
+		dest = ft_malloc_space(combi->len);
+	else if (combi->precision > combi->len && combi->precision > ft_strlen(toprint))
 		dest = cases1(combi, toprint, 1);
 	else if (combi->len > combi->precision && combi->precision > ft_strlen(toprint))
 	{

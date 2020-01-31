@@ -25,6 +25,7 @@ typedef struct	s_flag {
 }				t_flag;
 
 int			ft_printf(const char *arg, ...);
+int			verif(char const *arg, int *n);
 int			combi(va_list ap, char const *arg, int *n);
 int			find_format(va_list ap, char const *arg, int *n, t_flag *combi);
 void		check (va_list ap, char const *arg, int *n, t_flag *combi);
@@ -38,7 +39,6 @@ int			precision(char const *arg, int *n, t_flag *combi);
 char		*ft_malloc_zero(int n);
 char		*ft_malloc_space(int n);
 char		*print_porcent(t_flag *combi);
-int			verif(char const *arg, int *n);
 char		*print_char(t_flag *combi, char toprint);
 int			ft_strlen(char *src);
 char		*print_string(t_flag *combi, char *toprint);
