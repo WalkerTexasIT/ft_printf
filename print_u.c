@@ -114,11 +114,11 @@ char	*print_unsigned(t_flag *combi, unsigned num)
 
 	i = 0;
 	toprint = ft_uitoa(num);
-	if (combi->precision <= 0 && toprint[0] != '0')
+	if (combi->precision < 0 && toprint[0] != '0')
 		combi->precision = -1;
 	if (toprint[0] == '0' && combi->precision == 0)
 		dest = ft_malloc_space(combi->len);
-	else if (combi->precision > combi->len && combi->precision > ft_strlen(toprint))
+	else if (combi->precision >= combi->len && combi->precision > ft_strlen(toprint))
 		dest = cases1(combi, toprint, 1);
 	else if (combi->len > combi->precision && combi->precision > ft_strlen(toprint))
 	{
@@ -138,7 +138,7 @@ char	*print_unsigned(t_flag *combi, unsigned num)
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
-	else if (combi->len > ft_strlen(toprint) && combi->zero == 1 && combi->precision < 0)
+	else if (combi->len > ft_strlen(toprint) && combi->zero == 1 && combi->precision < 0 && combi->moins != 1)
 		dest = cases2(combi, toprint, 1);
 	else if (combi->len > ft_strlen(toprint))
 		dest = cases2(combi, toprint, 2);

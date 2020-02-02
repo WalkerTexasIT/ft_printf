@@ -48,9 +48,15 @@ int		nbr(char const *arg, int *n, t_flag *combi)
 
 int		star_pres(va_list ap, char const *arg, int *n, t_flag *combi)
 {
+	int i;
+
 	if (arg[*n] == '*')
 	{
-		combi->precision = va_arg(ap, int);
+		i = va_arg(ap, int);
+		if (i >= 0)
+			combi->precision = i;
+		else
+			combi->precision = -1;
 		(*n)++;
 		return (1);
 	}

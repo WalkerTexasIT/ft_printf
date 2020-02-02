@@ -18,7 +18,8 @@ int		main()
 	// ft_printf("{%3c}\n", 0);
 	// write(1, "\0", 1);
 	// printf("\n{%3c}", 0);
-	ft_printf("{%0-20u}\n", 1024u);
-	printf("{%0-20u}", 1024u);
+	//   printf("test\n");
+	ft_printf("%-80.35u\n" ,2166190087u);
+	printf("%-80.35u" ,2166190087u);
 	return (0);
 }

@@ -65,13 +65,12 @@ char	*print_hexa(t_flag *combi, unsigned int num, int maj)
 
 	i = 0;
 	toprint = ft_hexatoa(num, maj);
-	if (combi->precision <= 0 && toprint[0] != '0')
+	if (combi->precision < 0 && toprint[0] != '0')
 		combi->precision = -1;
 	if (toprint[0] == '0' && combi->precision == 0)
 		dest = ft_malloc_space(combi->len);
 	else if (combi->len > combi->precision && combi->precision > ft_strlen(toprint))
 	{
-		// option 2, 1
 		dest = ft_malloc_space(combi->len);
 		if (combi->moins == 1)
 		{
@@ -97,7 +96,7 @@ char	*print_hexa(t_flag *combi, unsigned int num, int maj)
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
-	else if (combi->len > ft_strlen(toprint) && combi->zero == 1 && combi->precision == -1)
+	else if (combi->len > ft_strlen(toprint) && combi->zero == 1 && combi->precision == -1 && combi->moins != 1)
 	{
 		dest = ft_malloc_zero(combi->len);
 		n = combi->len - ft_strlen(toprint);

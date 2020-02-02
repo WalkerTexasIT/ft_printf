@@ -25,14 +25,20 @@ void	check(va_list ap, char const *arg, int *n, t_flag *combi)
 	return ;
 }
 
-int		printstring(char *dest)
+int		printstring(t_flag *combi, char *dest)
 {
 	int n;
 
 	n = 0;
-	while (dest[n] != '\0')
+	while (dest[n] != '\0' || (dest[n] == '\0' && combi->iszero == 1))
 	{
-		write(1, &dest[n], 1);
+		if (dest[n] == '\0')
+		{
+			combi->iszero--;
+			write(1, "\0", 1);
+		}
+		else
+			write(1, &dest[n], 1);
 		n++;
 	}
 	return (n - 1);
@@ -64,7 +70,7 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 		dest = print_hexa(combi, va_arg(ap, unsigned int), 2);
 	else if (arg[*n] == 'p')
 		dest = print_pointer(combi, va_arg(ap, unsigned long long));
-	return (printstring(dest));
+	return (printstring(combi, dest));
 }
 
 int		combi(va_list ap, char const *arg, int *n)
@@ -75,6 +81,7 @@ int		combi(va_list ap, char const *arg, int *n)
 	combi.moins = 0;
 	combi.precision = -1;
 	combi.len = 0;
+	combi.iszero = 0;
 	return (find_format(ap, arg, n, &combi));
 }
 

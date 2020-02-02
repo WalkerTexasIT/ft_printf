@@ -16,6 +16,8 @@ char	*print_char(t_flag *combi, char toprint)
 {
 	char *dest;
 
+	if (toprint == 0)
+		combi->iszero = 1;
 	if (combi->len > 0)
 		if (combi->zero == 1 && combi->moins == 0)
 			dest = ft_malloc_zero(combi->len);
