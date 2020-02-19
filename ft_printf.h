@@ -20,7 +20,7 @@
 typedef struct	s_flag {
 	int			zero;
 	int			moins;
-	int			precision;
+	int			p;
 	int			len;
 	int			iszero;
 }				t_flag;
@@ -53,5 +53,6 @@ char			*print_hexa(t_flag *combi, unsigned int num, int maj);
 int				ft_puthexa(int n);
 char			*print_pointer(t_flag *combi, unsigned long long i);
 char			*ft_strdup(const char *s1);
+char			*ft_free(char **tofree, int ret);
 
 #endif

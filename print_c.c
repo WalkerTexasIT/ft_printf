@@ -20,11 +20,14 @@ char	*print_char(t_flag *combi, char toprint)
 		combi->iszero = 1;
 	if (combi->len > 0)
 		if (combi->zero == 1 && combi->moins == 0)
-			dest = ft_malloc_zero(combi->len);
+			if ((dest = ft_malloc_zero(combi->len)) == 0)
+				return (0);
 		else
-			dest = ft_malloc_space(combi->len);
+			if ((dest = ft_malloc_space(combi->len)) == 0)
+				return (0);
 	else
-		dest = ft_malloc_space(1);
+		if ((dest = ft_malloc_space(1)) == 0)
+			return (0);
 	if (combi->moins == 1 || combi->len == 0)
 		dest[0] = toprint;
 	else

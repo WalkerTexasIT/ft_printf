@@ -16,7 +16,8 @@ char	*dutils4(t_flag *combi, char *toprint, int i, int n)
 {
 	char *dest;
 
-	dest = ft_malloc_space(combi->len);
+	if ((dest = ft_malloc_space(combi->len)) == 0)
+		return (0);
 	if (combi->moins == 1)
 	{
 		n = 0;
@@ -57,7 +58,8 @@ char	*dutils2(t_flag *combi, char *toprint, int i, int n)
 {
 	char *dest;
 
-	dest = ft_malloc_space(combi->len);
+	if ((dest = ft_malloc_space(combi->len)) == 0)
+		return (0);
 	if (combi->moins == 1)
 	{
 		n = 0;
@@ -95,7 +97,8 @@ char	*dutils1(t_flag *combi, char *toprint, int i, int n)
 
 	if (toprint[0] == '-')
 	{
-		dest = ft_malloc_zero(combi->precision + 1);
+		if ((dest = ft_malloc_zero(combi->precision + 1)) == 0)
+			return (0);
 		n = combi->precision - ft_strlen(toprint) + 2;
 		dest[0] = toprint[i++];
 		while (toprint[i] != '\0')
@@ -103,7 +106,8 @@ char	*dutils1(t_flag *combi, char *toprint, int i, int n)
 	}
 	else
 	{
-		dest = ft_malloc_zero(combi->precision);
+		if ((dest = ft_malloc_zero(combi->precision)) == 0)
+			return (0);
 		n = combi->precision - ft_strlen(toprint);
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
@@ -170,21 +174,26 @@ char	*print_integer(t_flag *combi, int num)
 	if (combi->precision < 0 && toprint[0] != '0')
 		combi->precision = -1;
 	if (toprint[0] == '0' && combi->precision == 0)
-		dest = ft_malloc_space(combi->len);
+		if ((dest = ft_malloc_space(combi->len)) == 0)
+			return (ft_free(&toprint, 0));
 	else if (combi->len > ft_strlen(toprint) || combi->precision >= ft_strlen(toprint))
 	{
 		if (combi->precision >= combi->len && combi->precision >= ft_strlen(toprint))
-			dest = dutils1(combi, toprint, i, 0);
+			if ((dest = dutils1(combi, toprint, i, 0)) == 0)
+				return (ft_free(&toprint, 0));
 		else if (combi->len >= combi->precision && combi->precision >= ft_strlen(toprint))
-			dest = dutils2(combi, toprint, i, 0);
+			if ((dest = dutils2(combi, toprint, i, 0)) == 0)
+				return (ft_free(&toprint, 0));
 		else if (combi->len > combi->precision && combi->precision != -1)
-			dest = dutils4(combi, toprint, i, 0);
+			if ((dest = dutils4(combi, toprint, i, 0)) == 0)
+				return (ft_free(&toprint, 0));
 		else if (combi->len > ft_strlen(toprint))
 		{
 			if (combi->moins == 1)
 			{
 				n = 0;
-				dest = ft_malloc_space(combi->len);
+				if ((dest = ft_malloc_space(combi->len)) == 0)
+					return (ft_free(&toprint, 0));
 				while (toprint[i] != '\0')
 					dest[n++] = toprint[i++];
 			}
@@ -192,7 +201,8 @@ char	*print_integer(t_flag *combi, int num)
 			{
 				if (combi->zero == 1)
 				{
-					dest = ft_malloc_zero(combi->len);
+					if ((dest = ft_malloc_zero(combi->len)) == 0)
+						return (ft_free(&toprint, 0));
 					n = combi->len - ft_strlen(toprint);
 					if (toprint[0] == '-')
 					{
@@ -204,7 +214,8 @@ char	*print_integer(t_flag *combi, int num)
 				}
 				else
 				{
-					dest = ft_malloc_space(combi->len);
+					if ((dest = ft_malloc_space(combi->len)) == 0)
+						return (ft_free(&toprint, 0));
 					n = combi->len - ft_strlen(toprint);
 					while (toprint[i] != '\0')
 						dest[n++] = toprint[i++];
@@ -214,6 +225,6 @@ char	*print_integer(t_flag *combi, int num)
 	}
 	else
 		return (toprint);
-	free(toprint);
+	ft_free(&toprint, 0);
 	return (dest);
 }

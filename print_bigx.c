@@ -21,14 +21,16 @@ char	*option3(t_flag *combi, char *toprint, int ca)
 	i = 0;
 	if (ca == 1)
 	{
-		dest = ft_malloc_zero(combi->len);
+		if ((dest = ft_malloc_zero(combi->len)) == 0)
+			return (0);
 		n = combi->len - ft_strlen(toprint);
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
 	if (ca == 2)
 	{
-		dest = ft_malloc_zero(combi->precision);
+		if ((dest = ft_malloc_zero(combi->precision)) == 0)
+			return (0);
 		n = combi->precision - ft_strlen(toprint);
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];

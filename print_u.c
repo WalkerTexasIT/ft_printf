@@ -21,14 +21,16 @@ char	*cases2(t_flag *combi, char *toprint, int cas)
 	i = 0;
 	if (cas == 1)
 	{
-		dest = ft_malloc_zero(combi->len);
+		if ((dest = ft_malloc_zero(combi->len)) == 0)
+			return (0);
 		n = combi->len - ft_strlen(toprint);
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
 	else if (cas == 2)
 	{
-		dest = ft_malloc_space(combi->len);
+		if ((dest = ft_malloc_space(combi->len)) == 0)
+			return (0);
 		if (combi->moins == 0)
 			n = combi->len - ft_strlen(toprint);
 		else
@@ -48,18 +50,20 @@ char	*cases1(t_flag *combi, char *toprint, int cas)
 	i = 0;
 	if (cas == 1)
 	{
-		n = combi->precision - ft_strlen(toprint);
-		dest = ft_malloc_zero(combi->precision);
+		n = combi->p - ft_strlen(toprint);
+		if ((dest = ft_malloc_zero(combi->p)) == 0)
+			return (0);
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
 	else if (cas == 2)
 	{
 		if (combi->moins == 0)
-			n = combi->len - combi->precision;
+			n = combi->len - combi->p;
 		else
 			n = 0;
-		dest = ft_malloc_space(combi->len);
+		if ((dest = ft_malloc_space(combi->len)) == 0)
+			return (0);
 		while (n < (combi->len - ft_strlen(toprint)))
 			dest[n++] = '0';
 		while (toprint[i] != '\0')
@@ -113,36 +117,50 @@ char	*print_unsigned(t_flag *combi, unsigned num)
 	int		n;
 
 	i = 0;
-	toprint = ft_uitoa(num);
-	if (combi->precision < 0 && toprint[0] != '0')
-		combi->precision = -1;
-	if (toprint[0] == '0' && combi->precision == 0)
-		dest = ft_malloc_space(combi->len);
-	else if (combi->precision >= combi->len && combi->precision > ft_strlen(toprint))
-		dest = cases1(combi, toprint, 1);
-	else if (combi->len > combi->precision && combi->precision > ft_strlen(toprint))
+	if ((toprint = ft_uitoa(num)) == 0)
+		return (0);
+	/*if (combi->precision < 0 && toprint[0] != '0')
+		combi->precision = -1;*/
+	combi->p = (combi->p < 0 && toprint[0] != '0') ? -1 : combi->p
+	if (toprint[0] == '0' && combi->p == 0)
 	{
-		dest = ft_malloc_space(combi->len);
+		if ((dest = ft_malloc_space(combi->len)) == 0)
+			return (ft_free(&toprint, 0));
+	}
+	else if (combi->p >= combi->len && combi->p > ft_strlen(toprint))
+	{
+		if ((dest = cases1(combi, toprint, 1)) == 0)
+			return (ft_free(&toprint, 0));
+	}
+	else if (combi->len > combi->p && combi->p > ft_strlen(toprint))
+	{
+		if ((dest = ft_malloc_space(combi->len)) == 0)
+			return (ft_free(&toprint, 0));
 		if (combi->moins == 0)
 		{
-			n = combi->len - combi->precision;
+			n = combi->len - combi->p;
 			while (n < (combi->len - ft_strlen(toprint)))
 				dest[n++] = '0';
 		}
 		else
 		{
 			n = 0;
-			while (n < (combi->precision - ft_strlen(toprint)))
+			while (n < (combi->p - ft_strlen(toprint)))
 				dest[n++] = '0';
 		}
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
-	else if (combi->len > ft_strlen(toprint) && combi->zero == 1 && combi->precision < 0 && combi->moins != 1)
-		dest = cases2(combi, toprint, 1);
+	else if (combi->len > ft_strlen(toprint) && combi->zero == 1 && combi->p < 0 && combi->moins != 1)
+	{
+		if ((dest = cases2(combi, toprint, 1)) == 0)
+			return (ft_free(&toprint, 0));
+	}
 	else if (combi->len > ft_strlen(toprint))
-		dest = cases2(combi, toprint, 2);
+		if ((dest = cases2(combi, toprint, 2)) == 0)
+			return (ft_free(&toprint, 0));
 	else
-		dest = toprint;
+		return (toprint);
+	ft_free(&toprint, 0);
 	return (dest);
 }

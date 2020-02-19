@@ -41,6 +41,7 @@ int		printstring(t_flag *combi, char *dest)
 			write(1, &dest[n], 1);
 		n++;
 	}
+	ft_free(&dest, 0);
 	return (n - 1);
 }
 
@@ -55,21 +56,29 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 		return (0);
 	}
 	if (arg[*n] == '%')
-		dest = print_porcent(combi);
+		if ((dest = print_porcent(combi)) == 0)
+			return (ft_free(&dest, -1));
 	else if (arg[*n] == 'c')
-		dest = print_char(combi, va_arg(ap, int));
+		if ((dest = print_char(combi, va_arg(ap, int))) == 0)
+			return (ft_free(&dest, -1));
 	else if (arg[*n] == 's')
-		dest = print_string(combi, va_arg(ap, char*));
+		if ((dest = print_string(combi, va_arg(ap, char*))) == 0)
+			return (ft_free(&dest, -1));
 	else if (arg[*n] == 'd' || arg[*n] == 'i')
-		dest = print_integer(combi, va_arg(ap, int));
+		if ((dest = print_integer(combi, va_arg(ap, int))) == 0)
+			return (ft_free(&dest, -1));
 	else if (arg[*n] == 'u')
-		dest = print_unsigned(combi, va_arg(ap, unsigned int));
+		if ((dest = print_unsigned(combi, va_arg(ap, unsigned int))) == 0)
+			return (ft_free(&dest, -1));
 	else if (arg[*n] == 'x')
-		dest = print_hexa(combi, va_arg(ap, unsigned int), 1);
+		if ((dest = print_hexa(combi, va_arg(ap, unsigned int), 1)) == 0)
+			return (ft_free(&dest, -1));
 	else if (arg[*n] == 'X')
-		dest = print_hexa(combi, va_arg(ap, unsigned int), 2);
+		if ((dest = print_hexa(combi, va_arg(ap, unsigned int), 2)) == 0)
+			return (ft_free(&dest, -1));
 	else if (arg[*n] == 'p')
-		dest = print_pointer(combi, va_arg(ap, unsigned long long));
+		if ((dest = print_pointer(combi, va_arg(ap, unsigned long long))) == 0)
+			return (ft_free(&dest, -1));
 	return (printstring(combi, dest));
 }
 
@@ -104,8 +113,7 @@ int		ft_printf(char const *arg, ...)
 		}
 		else
 		{
-			write(1, &arg[n], 1);
-			n++;
+			write(1, &arg[n++], 1);
 			ret++;
 		}
 	}

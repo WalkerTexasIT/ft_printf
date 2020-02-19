@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_%.c                                          :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/16 11:24:25 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/16 11:24:26 by bminner          ###   ########.fr       */
+/*   Created: 2020/02/19 15:19:41 by bminner           #+#    #+#             */
+/*   Updated: 2020/02/19 15:19:43 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-char	*print_porcent(t_flag *combi)
+char	*ft_free(char **tofree, int ret)
 {
-	char *dest;
-
-	if (combi->len > 0)
-		if (combi->zero == 1 && combi->moins == 0)
-			if ((dest = ft_malloc_zero(combi->len)) == 0)
-				return (0);
-		else
-			if ((dest = ft_malloc_space(combi->len)) == 0)
-				return (0);
-	else
-		if ((dest = ft_malloc_space(1)) == 0)
-			return (0);
-	if (combi->moins == 1 || combi->len == 0)
-		dest[0] = '%';
-	else
-		dest[combi->len - 1] = '%';
-	return (dest);
+	if (*tofree)
+	{
+		free(*tofree);
+		*tofree = 0;
+	}
+	return (0);
 }

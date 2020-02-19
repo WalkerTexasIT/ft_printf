@@ -20,7 +20,8 @@ char	*first(t_flag *combi, char *toprint)
 
 	i = 0;
 	n = 0;
-	dest = ft_malloc_space(combi->len);
+	if ((dest = ft_malloc_space(combi->len)) == 0)
+		return (0);
 	if (combi->moins == 1)
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
@@ -81,22 +82,26 @@ char	*print_pointer(t_flag *combi, unsigned long long i)
 	j = 0;
 	if (i == 0 && combi->precision == -1)
 	{
-		toprint = ft_malloc_zero(2);
+		if ((toprint = ft_malloc_zero(2)) == 0)
+			return (0);
 		toprint[0] = '0';
 		toprint[1] = 'x';
 		toprint[2] = '0';
 	}
 	else if (i == 0)
 	{
-		toprint = ft_malloc_zero(combi->precision + 2);
+		if ((toprint = ft_malloc_zero(combi->precision + 2)) == 0)
+			return (ft_free(&toprint, 0));
 		toprint[0] = '0';
 		toprint[1] = 'x';
 	}
 	else
-		toprint = ft_pointertoa(i);
+		if ((toprint = ft_pointertoa(i)) == 0)
+			return (0);
 	if (combi->precision > ft_strlen(toprint) && i != 0 && combi->precision > combi->len)
 	{
-		dest = ft_malloc_zero(combi->precision + 2);
+		if ((dest = ft_malloc_zero(combi->precision + 2)) == 0)
+			return (ft_free(&toprint, 0));
 		dest[0] = toprint[j++];
 		dest[1] = toprint[j++];
 		n = combi->precision - ft_strlen(toprint) + 4;
@@ -104,8 +109,10 @@ char	*print_pointer(t_flag *combi, unsigned long long i)
 			dest[n++] = toprint[j++];
 	}
 	else if (combi->len > ft_strlen(toprint))
-		dest = first(combi, toprint);
+		if ((dest = first(combi, toprint)) == 0)
+			return (ft_free(&toprint, 0));
 	else
 		return (toprint);
+	ft_free(&toprint, 0);
 	return (dest);
 }
