@@ -21,3 +21,13 @@ char	*ft_free(char **tofree, int ret)
 	}
 	return (0);
 }
+
+int		ft_free_retint(char **tofree, int ret)
+{
+	if (*tofree)
+	{
+		free(*tofree);
+		*tofree = 0;
+	}
+	return (0);
+}

@@ -29,9 +29,9 @@ char	*option3(t_flag *combi, char *toprint, int ca)
 	}
 	if (ca == 2)
 	{
-		if ((dest = ft_malloc_zero(combi->precision)) == 0)
+		if ((dest = ft_malloc_zero(combi->p)) == 0)
 			return (0);
-		n = combi->precision - ft_strlen(toprint);
+		n = combi->p - ft_strlen(toprint);
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}

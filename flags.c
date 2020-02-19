@@ -16,7 +16,7 @@ int		moins(char const *arg, int *n, t_flag *combi)
 {
 	while (arg[*n] == '-')
 	{
-		combi->moins = 1;
+		combi->m = 1;
 		(*n)++;
 	}
 	return (0);
@@ -54,9 +54,9 @@ int		star_pres(va_list ap, char const *arg, int *n, t_flag *combi)
 	{
 		i = va_arg(ap, int);
 		if (i >= 0)
-			combi->precision = i;
+			combi->p = i;
 		else
-			combi->precision = -1;
+			combi->p = -1;
 		(*n)++;
 		return (1);
 	}
@@ -71,7 +71,7 @@ int		star_len(va_list ap, char const *arg, int *n, t_flag *combi)
 		(*n)++;
 		if (combi->len < 0)
 		{
-			combi->moins = 1;
+			combi->m = 1;
 			combi->len *= -1;
 		}
 		return (1);

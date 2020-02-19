@@ -19,7 +19,7 @@
 
 typedef struct	s_flag {
 	int			zero;
-	int			moins;
+	int			m;
 	int			p;
 	int			len;
 	int			iszero;
@@ -54,5 +54,6 @@ int				ft_puthexa(int n);
 char			*print_pointer(t_flag *combi, unsigned long long i);
 char			*ft_strdup(const char *s1);
 char			*ft_free(char **tofree, int ret);
+int				ft_free_retint(char **tofree, int ret);
 
 #endif

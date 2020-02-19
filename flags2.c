@@ -16,7 +16,7 @@ int		precision(char const *arg, int *n, t_flag *combi)
 {
 	if (arg[*n] == '.')
 	{
-		combi->precision = -2;
+		combi->p = -2;
 		(*n)++;
 		return (1);
 	}
@@ -28,10 +28,10 @@ int		nbr_pre(char const *arg, int *n, t_flag *combi)
 	int i;
 
 	i = 0;
-	combi->precision = 0;
+	combi->p = 0;
 	while (arg[*n] >= '0' && arg[*n] <= '9')
 	{
-		combi->precision = combi->precision * 10 + arg[*n] - 48;
+		combi->p = combi->p * 10 + arg[*n] - 48;
 		(*n)++;
 		i = 1;
 	}

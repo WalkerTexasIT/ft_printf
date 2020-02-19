@@ -56,29 +56,45 @@ int		find_format(va_list ap, char const *arg, int *n, t_flag *combi)
 		return (0);
 	}
 	if (arg[*n] == '%')
+	{
 		if ((dest = print_porcent(combi)) == 0)
-			return (ft_free(&dest, -1));
+			return (ft_free_retint(&dest, -1));
+	}
 	else if (arg[*n] == 'c')
+	{
 		if ((dest = print_char(combi, va_arg(ap, int))) == 0)
-			return (ft_free(&dest, -1));
+			return (ft_free_retint(&dest, -1));
+	}
 	else if (arg[*n] == 's')
+	{
 		if ((dest = print_string(combi, va_arg(ap, char*))) == 0)
-			return (ft_free(&dest, -1));
+			return (ft_free_retint(&dest, -1));
+	}
 	else if (arg[*n] == 'd' || arg[*n] == 'i')
+	{
 		if ((dest = print_integer(combi, va_arg(ap, int))) == 0)
-			return (ft_free(&dest, -1));
+			return (ft_free_retint(&dest, -1));
+	}
 	else if (arg[*n] == 'u')
+	{
 		if ((dest = print_unsigned(combi, va_arg(ap, unsigned int))) == 0)
-			return (ft_free(&dest, -1));
+			return (ft_free_retint(&dest, -1));
+	}
 	else if (arg[*n] == 'x')
+	{
 		if ((dest = print_hexa(combi, va_arg(ap, unsigned int), 1)) == 0)
-			return (ft_free(&dest, -1));
+			return (ft_free_retint(&dest, -1));
+	}
 	else if (arg[*n] == 'X')
+	{
 		if ((dest = print_hexa(combi, va_arg(ap, unsigned int), 2)) == 0)
-			return (ft_free(&dest, -1));
+			return (ft_free_retint(&dest, -1));
+	}
 	else if (arg[*n] == 'p')
+	{
 		if ((dest = print_pointer(combi, va_arg(ap, unsigned long long))) == 0)
-			return (ft_free(&dest, -1));
+			return (ft_free_retint(&dest, -1));
+	}
 	return (printstring(combi, dest));
 }
 
@@ -87,8 +103,8 @@ int		combi(va_list ap, char const *arg, int *n)
 	t_flag	combi;
 
 	combi.zero = 0;
-	combi.moins = 0;
-	combi.precision = -1;
+	combi.m = 0;
+	combi.p = -1;
 	combi.len = 0;
 	combi.iszero = 0;
 	return (find_format(ap, arg, n, &combi));

@@ -66,41 +66,43 @@ char	*print_hexa(t_flag *combi, unsigned int num, int maj)
 	i = 0;
 	if ((toprint = ft_hexatoa(num, maj)) == 0)
 		return (0);
-	if (combi->precision < 0 && toprint[0] != '0')
-		combi->precision = -1;
-	if (toprint[0] == '0' && combi->precision == 0)
-		if ((dest = ft_malloc_space(combi->len)) == 0)
-			return (ft_free(&toprint, 0));
-	else if (combi->len > combi->precision && combi->precision > ft_strlen(toprint))
+	if (combi->p < 0 && toprint[0] != '0')
+		combi->p = -1;
+	if (toprint[0] == '0' && combi->p == 0)
 	{
 		if ((dest = ft_malloc_space(combi->len)) == 0)
 			return (ft_free(&toprint, 0));
-		if (combi->moins == 1)
+	}
+	else if (combi->len > combi->p && combi->p > ft_strlen(toprint))
+	{
+		if ((dest = ft_malloc_space(combi->len)) == 0)
+			return (ft_free(&toprint, 0));
+		if (combi->m == 1)
 		{
 			n = 0;
-			while (n < (combi->precision - ft_strlen(toprint)))
+			while (n < (combi->p - ft_strlen(toprint)))
 				dest[n++] = '0';
 			while (toprint[i] != '\0')
 				dest[n++] = toprint[i++];
 		}
 		else
 		{
-			n = combi->len - combi->precision;
+			n = combi->len - combi->p;
 			while (n < (combi->len - ft_strlen(toprint)))
 				dest[n++] = '0';
 			while (toprint[i] != '\0')
 				dest[n++] = toprint[i++];
 		}
 	}
-	else if (combi->precision > ft_strlen(toprint))
+	else if (combi->p > ft_strlen(toprint))
 	{
-		if ((dest = ft_malloc_zero(combi->precision)) == 0)
+		if ((dest = ft_malloc_zero(combi->p)) == 0)
 			return (ft_free(&toprint, 0));
-		n = combi->precision - ft_strlen(toprint);
+		n = combi->p - ft_strlen(toprint);
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
-	else if (combi->len > ft_strlen(toprint) && combi->zero == 1 && combi->precision == -1 && combi->moins != 1)
+	else if (combi->len > ft_strlen(toprint) && combi->zero == 1 && combi->p == -1 && combi->m != 1)
 	{
 		if ((dest = ft_malloc_zero(combi->len)) == 0)
 			return (ft_free(&toprint, 0));
@@ -108,7 +110,7 @@ char	*print_hexa(t_flag *combi, unsigned int num, int maj)
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
-	else if (combi->len > ft_strlen(toprint) && combi->moins == 1 && combi->precision == -1)
+	else if (combi->len > ft_strlen(toprint) && combi->m == 1 && combi->p == -1)
 	{
 		if ((dest = ft_malloc_space(combi->len)) == 0)
 			return (ft_free(&toprint, 0));
@@ -116,16 +118,20 @@ char	*print_hexa(t_flag *combi, unsigned int num, int maj)
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
-	else if (combi->len > ft_strlen(toprint) && combi->precision <= ft_strlen(toprint))
+	else if (combi->len > ft_strlen(toprint) && combi->p <= ft_strlen(toprint))
 	{
 		n = combi->len - ft_strlen(toprint);
-		if (combi->zero == 1 && combi->precision == -1 && combi->moins == 0)
+		if (combi->zero == 1 && combi->p == -1 && combi->m == 0)
+		{
 			if ((dest = ft_malloc_zero(combi->len)) == 0)
 				return (ft_free(&toprint, 0));
+		}
 		else
+		{
 			if ((dest = ft_malloc_space(combi->len)) == 0)
 				return (ft_free(&toprint, 0));
-		if (combi->moins == 1)
+		}
+		if (combi->m == 1)
 			while (toprint[i] != '\0')
 			{
 				dest[i] = toprint[i];
