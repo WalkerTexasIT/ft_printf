@@ -68,3 +68,23 @@ int		ft_lenhexa(long long n)
 	}
 	return (i);
 }
+
+char	*ft_strdup(const char *s1)
+{
+	int		len;
+	int		n;
+	char	*dest;
+
+	n = 0;
+	len = ((ft_strlen(s1)) + 1);
+	if ((dest = ((char *)malloc(sizeof(char) * len))))
+	{
+		while (n < len)
+		{
+			dest[n] = (char)s1[n];
+			n++;
+		}
+		return (dest);
+	}
+	return (0);
+}

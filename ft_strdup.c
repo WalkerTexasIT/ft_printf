@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testprintf.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/13 10:22:00 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/13 10:23:37 by bminner          ###   ########.fr       */
+/*   Created: 2019/10/11 15:45:18 by bminner           #+#    #+#             */
+/*   Updated: 2019/10/11 15:49:09 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int		main()
+char	*ft_strdup(const char *s1)
 {
-	//printf("%s\n", "%7.5s, bombastic");
-	// ft_printf("{%3c}\n", 0);
-	// write(1, "\0", 1);
-	// printf("\n{%3c}", 0);
-	//   printf("test\n");
-	ft_printf("|%0.d|\n" , 10);
-	//printf("%-80.35u" ,2166190087u);
+	int		len;
+	int		n;
+	char	*dest;
+
+	n = 0;
+	len = ((ft_strlen(s1)) + 1);
+	if ((dest = ((char *)malloc(sizeof(char) * len))))
+	{
+		while (n < len)
+		{
+			dest[n] = (char)s1[n];
+			n++;
+		}
+		return (dest);
+	}
 	return (0);
 }

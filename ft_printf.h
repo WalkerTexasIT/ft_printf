@@ -52,5 +52,6 @@ char			*ft_hexatoa(unsigned int n, int k);
 char			*print_hexa(t_flag *combi, unsigned int num, int maj);
 int				ft_puthexa(int n);
 char			*print_pointer(t_flag *combi, unsigned long long i);
+char			*ft_strdup(const char *s1);
 
 #endif

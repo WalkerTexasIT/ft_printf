@@ -69,6 +69,9 @@ char	*print_string(t_flag *combi, char *toprint)
 	n = 0;
 	if (toprint == 0)
 		toprint = "(null)";
+	else
+		if ((toprint = ft_strdup((const char*)toprint)) == 0)
+			return (0);
 	if (combi->precision != -1 && combi->precision >= combi->len && combi->precision <= ft_strlen(toprint))
 	{
 		dest = ft_malloc_space(combi->precision);
