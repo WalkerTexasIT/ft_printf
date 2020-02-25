@@ -16,7 +16,7 @@ char	*ft_malloc_space(int n)
 {
 	char *dest;
 
-	if (!(dest = (char*)malloc(sizeof(char) * n)))
+	if (!(dest = (char*)malloc(sizeof(char) * (n + 1))))
 		return (0);
 	dest[n] = '\0';
 	n--;
@@ -32,7 +32,7 @@ char	*ft_malloc_zero(int n)
 {
 	char *dest;
 
-	if (!(dest = (char*)malloc(sizeof(char) * n)))
+	if (!(dest = (char*)malloc(sizeof(char) * (n + 1))))
 		return (0);
 	dest[n] = '\0';
 	n--;

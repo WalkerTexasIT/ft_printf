@@ -11,15 +11,12 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <fcntl.h>
 
 int		main()
 {
-	//printf("%s\n", "%7.5s, bombastic");
-	// ft_printf("{%3c}\n", 0);
-	// write(1, "\0", 1);
-	// printf("\n{%3c}", 0);
-	//   printf("test\n");
-	ft_printf("|%0.d|\n" , 10);
-	//printf("%-80.35u" ,2166190087u);
+	ft_printf("%2p\n", NULL);
+	//printf("%2p", NULL);
+	//system("leaks a.out");
 	return (0);
 }

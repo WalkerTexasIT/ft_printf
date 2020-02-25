@@ -20,7 +20,7 @@ char	*first(t_flag *combi, char *toprint)
 
 	i = 0;
 	n = 0;
-	if ((dest = ft_malloc_space(combi->len)) == 0)
+	if (!(dest = ft_malloc_space(combi->len)))
 		return (0);
 	if (combi->m == 1)
 		while (toprint[i] != '\0')

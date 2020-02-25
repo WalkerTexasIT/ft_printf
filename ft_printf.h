@@ -29,7 +29,7 @@ int				ft_printf(const char *arg, ...);
 int				verif(char const *arg, int *n);
 int				combi(va_list ap, char const *arg, int *n);
 int				find_format(va_list ap, char const *arg, int *n, t_flag *combi);
-void			check (va_list ap, char const *arg, int *n, t_flag *combi);
+void			check(va_list ap, char const *arg, int *n, t_flag *combi);
 int				moins(char const *arg, int *n, t_flag *combi);
 int				zero(char const *arg, int *n, t_flag *combi);
 int				nbr(char const *arg, int *n, t_flag *combi);
@@ -55,5 +55,6 @@ char			*print_pointer(t_flag *combi, unsigned long long i);
 char			*ft_strdup(const char *s1);
 char			*ft_free(char **tofree, int ret);
 int				ft_free_retint(char **tofree, int ret);
+int				printstring(t_flag *combi, char *dest);
 
 #endif

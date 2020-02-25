@@ -19,7 +19,7 @@ SRC = ft_printf.c \
 	combi.c \
 	flags.c \
 	flags2.c \
-	print_%.c \
+	print_porcent.c \
 	print_bigx.c \
 	print_c.c \
 	print_d.c \
