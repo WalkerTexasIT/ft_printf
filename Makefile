@@ -28,7 +28,12 @@ SRC = ft_printf.c \
 	print_u.c \
 	print_x.c \
 	utils.c \
-	utils2.c
+	utils2.c \
+	print_d1.c \
+	print_d2.c \
+	print_s1.c \
+	print_u1.c \
+	print_x1.c
 
 OBJ = $(SRC:.c=.o)
 

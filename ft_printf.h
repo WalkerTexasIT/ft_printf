@@ -56,5 +56,18 @@ char			*ft_strdup(const char *s1);
 char			*ft_free(char **tofree, int ret);
 int				ft_free_retint(char **tofree, int ret);
 int				printstring(t_flag *combi, char *dest);
+char			*dutils6(t_flag *combi, char *toprint, int i, int n);
+char			*dutils5(t_flag *combi, char *toprint, int i, int n);
+char			*dutils4(t_flag *combi, char *toprint, int i, int n);
+char			*dutils3(t_flag *combi, char *toprint, int i, char *dest);
+char			*dutils2(t_flag *combi, char *toprint, int i, int n);
+char			*dutils1(t_flag *combi, char *toprint, int i, int n);
+char			*xutils2(t_flag *combi, char *toprint, int i, int n);
+char			*xutils3(t_flag *combi, char *toprint, int i, int n);
+char			*cases2(t_flag *combi, char *toprint, int cas);
+char			*uutils1(t_flag *combi, char *toprint, int i, int n);
+char			*prints4(t_flag *combi, char *toprint, int i, int n);
+char			*printlen(t_flag *combi, char *toprint, int n);
+char			*putils1(t_flag *combi, char *toprint, int j, int n);
 
 #endif

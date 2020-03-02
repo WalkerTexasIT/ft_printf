@@ -12,6 +12,59 @@
 
 #include "ft_printf.h"
 
+char	*xutils1(t_flag *combi, char *toprint, int i, int n)
+{
+	char *dest;
+
+	if ((dest = ft_malloc_space(combi->len)) == 0)
+		return (0);
+	if (combi->m == 1)
+	{
+		n = 0;
+		while (n < (combi->p - ft_strlen(toprint)))
+			dest[n++] = '0';
+		while (toprint[i] != '\0')
+			dest[n++] = toprint[i++];
+	}
+	else
+	{
+		n = combi->len - combi->p;
+		while (n < (combi->len - ft_strlen(toprint)))
+			dest[n++] = '0';
+		while (toprint[i] != '\0')
+			dest[n++] = toprint[i++];
+	}
+	return (dest);
+}
+
+char	*xutils4(t_flag *combi, char *toprint, int i, int n)
+{
+	char *dest;
+
+	if (combi->p > ft_strlen(toprint))
+	{
+		if ((dest = ft_malloc_zero(combi->p)) == 0)
+			return (ft_free(&toprint, 0));
+		n = combi->p - ft_strlen(toprint);
+		while (toprint[i] != '\0')
+			dest[n++] = toprint[i++];
+	}
+	else if (combi->len > ft_strlen(toprint) && combi->p == -1)
+	{
+		if ((dest = xutils3(combi, toprint, i, n)) == 0)
+			return (ft_free(&toprint, 0));
+	}
+	else if (combi->len > ft_strlen(toprint) && combi->p <= ft_strlen(toprint))
+	{
+		if ((dest = xutils2(combi, toprint, i, n)) == 0)
+			return (ft_free(&toprint, 0));
+	}
+	else
+		return (toprint);
+	ft_free(&toprint, 0);
+	return (dest);
+}
+
 int		ft_puthexa(int n)
 {
 	if (0 <= n && n <= 9)
@@ -66,8 +119,7 @@ char	*print_hexa(t_flag *combi, unsigned int num, int maj)
 	i = 0;
 	if ((toprint = ft_hexatoa(num, maj)) == 0)
 		return (0);
-	if (combi->p < 0 && toprint[0] != '0')
-		combi->p = -1;
+	combi->p = (combi->p < 0 && toprint[0] != '0') ? -1 : combi->p;
 	if (toprint[0] == '0' && combi->p == 0)
 	{
 		if ((dest = ft_malloc_space(combi->len)) == 0)
@@ -75,74 +127,11 @@ char	*print_hexa(t_flag *combi, unsigned int num, int maj)
 	}
 	else if (combi->len > combi->p && combi->p > ft_strlen(toprint))
 	{
-		if ((dest = ft_malloc_space(combi->len)) == 0)
+		if ((dest = xutils1(combi, toprint, i, n)) == 0)
 			return (ft_free(&toprint, 0));
-		if (combi->m == 1)
-		{
-			n = 0;
-			while (n < (combi->p - ft_strlen(toprint)))
-				dest[n++] = '0';
-			while (toprint[i] != '\0')
-				dest[n++] = toprint[i++];
-		}
-		else
-		{
-			n = combi->len - combi->p;
-			while (n < (combi->len - ft_strlen(toprint)))
-				dest[n++] = '0';
-			while (toprint[i] != '\0')
-				dest[n++] = toprint[i++];
-		}
-	}
-	else if (combi->p > ft_strlen(toprint))
-	{
-		if ((dest = ft_malloc_zero(combi->p)) == 0)
-			return (ft_free(&toprint, 0));
-		n = combi->p - ft_strlen(toprint);
-		while (toprint[i] != '\0')
-			dest[n++] = toprint[i++];
-	}
-	else if (combi->len > ft_strlen(toprint) && combi->zero == 1 && combi->p == -1 && combi->m != 1)
-	{
-		if ((dest = ft_malloc_zero(combi->len)) == 0)
-			return (ft_free(&toprint, 0));
-		n = combi->len - ft_strlen(toprint);
-		while (toprint[i] != '\0')
-			dest[n++] = toprint[i++];
-	}
-	else if (combi->len > ft_strlen(toprint) && combi->m == 1 && combi->p == -1)
-	{
-		if ((dest = ft_malloc_space(combi->len)) == 0)
-			return (ft_free(&toprint, 0));
-		n = 0;
-		while (toprint[i] != '\0')
-			dest[n++] = toprint[i++];
-	}
-	else if (combi->len > ft_strlen(toprint) && combi->p <= ft_strlen(toprint))
-	{
-		n = combi->len - ft_strlen(toprint);
-		if (combi->zero == 1 && combi->p == -1 && combi->m == 0)
-		{
-			if ((dest = ft_malloc_zero(combi->len)) == 0)
-				return (ft_free(&toprint, 0));
-		}
-		else
-		{
-			if ((dest = ft_malloc_space(combi->len)) == 0)
-				return (ft_free(&toprint, 0));
-		}
-		if (combi->m == 1)
-			while (toprint[i] != '\0')
-			{
-				dest[i] = toprint[i];
-				i++;
-			}
-		else
-			while (toprint[i] != '\0')
-				dest[n++] = toprint[i++];
 	}
 	else
-		return (toprint);
+		return (xutils4(combi, toprint, i, n));
 	ft_free(&toprint, 0);
 	return (dest);
 }

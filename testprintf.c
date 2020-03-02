@@ -15,8 +15,8 @@
 
 int		main()
 {
-	ft_printf("%2p\n", NULL);
-	//printf("%2p", NULL);
+	ft_printf("|%3x|\n", 0);
+	printf("|%3x|\n", 0);
 	//system("leaks a.out");
 	return (0);
 }

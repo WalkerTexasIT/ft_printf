@@ -12,35 +12,6 @@
 
 #include "ft_printf.h"
 
-char	*cases2(t_flag *combi, char *toprint, int cas)
-{
-	char	*dest;
-	int		i;
-	int		n;
-
-	i = 0;
-	if (cas == 1)
-	{
-		if ((dest = ft_malloc_zero(combi->len)) == 0)
-			return (0);
-		n = combi->len - ft_strlen(toprint);
-		while (toprint[i] != '\0')
-			dest[n++] = toprint[i++];
-	}
-	else if (cas == 2)
-	{
-		if ((dest = ft_malloc_space(combi->len)) == 0)
-			return (0);
-		if (combi->m == 0)
-			n = combi->len - ft_strlen(toprint);
-		else
-			n = 0;
-		while (toprint[i] != '\0')
-			dest[n++] = toprint[i++];
-	}
-	return (dest);
-}
-
 char	*cases1(t_flag *combi, char *toprint, int cas)
 {
 	char	*dest;
@@ -58,10 +29,7 @@ char	*cases1(t_flag *combi, char *toprint, int cas)
 	}
 	else if (cas == 2)
 	{
-		if (combi->m == 0)
-			n = combi->len - combi->p;
-		else
-			n = 0;
+		n = (combi->m == 0) ? combi->len - combi->p : 0;
 		if ((dest = ft_malloc_space(combi->len)) == 0)
 			return (0);
 		while (n < (combi->len - ft_strlen(toprint)))
@@ -69,6 +37,32 @@ char	*cases1(t_flag *combi, char *toprint, int cas)
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
+	return (dest);
+}
+
+char	*uutils0(t_flag *combi, char *toprint, int i, int n)
+{
+	char *dest;
+
+	if (combi->len > combi->p && combi->p > ft_strlen(toprint))
+	{
+		if ((dest = uutils1(combi, toprint, i, n)) == 0)
+			return (ft_free(&toprint, 0));
+	}
+	else if (combi->len > ft_strlen(toprint) && combi->zero == 1
+									&& combi->p < 0 && combi->m != 1)
+	{
+		if ((dest = cases2(combi, toprint, 1)) == 0)
+			return (ft_free(&toprint, 0));
+	}
+	else if (combi->len > ft_strlen(toprint))
+	{
+		if ((dest = cases2(combi, toprint, 2)) == 0)
+			return (ft_free(&toprint, 0));
+	}
+	else
+		return (toprint);
+	ft_free(&toprint, 0);
 	return (dest);
 }
 
@@ -130,37 +124,8 @@ char	*print_unsigned(t_flag *combi, unsigned num)
 		if ((dest = cases1(combi, toprint, 1)) == 0)
 			return (ft_free(&toprint, 0));
 	}
-	else if (combi->len > combi->p && combi->p > ft_strlen(toprint))
-	{
-		if ((dest = ft_malloc_space(combi->len)) == 0)
-			return (ft_free(&toprint, 0));
-		if (combi->m == 0)
-		{
-			n = combi->len - combi->p;
-			while (n < (combi->len - ft_strlen(toprint)))
-				dest[n++] = '0';
-		}
-		else
-		{
-			n = 0;
-			while (n < (combi->p - ft_strlen(toprint)))
-				dest[n++] = '0';
-		}
-		while (toprint[i] != '\0')
-			dest[n++] = toprint[i++];
-	}
-	else if (combi->len > ft_strlen(toprint) && combi->zero == 1 && combi->p < 0 && combi->m != 1)
-	{
-		if ((dest = cases2(combi, toprint, 1)) == 0)
-			return (ft_free(&toprint, 0));
-	}
-	else if (combi->len > ft_strlen(toprint))
-	{
-		if ((dest = cases2(combi, toprint, 2)) == 0)
-			return (ft_free(&toprint, 0));
-	}
 	else
-		return (toprint);
+		return (uutils0(combi, toprint, i, n));
 	ft_free(&toprint, 0);
 	return (dest);
 }

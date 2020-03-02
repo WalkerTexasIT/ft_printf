@@ -72,14 +72,10 @@ char	*ft_pointertoa(unsigned long long i)
 	return (dest);
 }
 
-char	*print_pointer(t_flag *combi, unsigned long long i)
+char	*definetoprint(t_flag *combi, unsigned long long i)
 {
-	char *dest;
 	char *toprint;
-	int		j;
-	int		n;
 
-	j = 0;
 	if (i == 0 && combi->p == -1)
 	{
 		if ((toprint = ft_malloc_zero(2)) == 0)
@@ -91,22 +87,32 @@ char	*print_pointer(t_flag *combi, unsigned long long i)
 	else if (i == 0)
 	{
 		if ((toprint = ft_malloc_zero(combi->p + 2)) == 0)
-			return (ft_free(&toprint, 0));
+			return (0);
 		toprint[0] = '0';
 		toprint[1] = 'x';
 	}
 	else
+	{
 		if ((toprint = ft_pointertoa(i)) == 0)
 			return (0);
+	}
+	return (toprint);
+}
+
+char	*print_pointer(t_flag *combi, unsigned long long i)
+{
+	char	*dest;
+	char	*toprint;
+	int		j;
+	int		n;
+
+	j = 0;
+	if ((toprint = definetoprint(combi, i)) == 0)
+		return (0);
 	if (combi->p > ft_strlen(toprint) && i != 0 && combi->p > combi->len)
 	{
-		if ((dest = ft_malloc_zero(combi->p + 2)) == 0)
+		if ((dest = putils1(combi, toprint, j, n)) == 0)
 			return (ft_free(&toprint, 0));
-		dest[0] = toprint[j++];
-		dest[1] = toprint[j++];
-		n = combi->p - ft_strlen(toprint) + 4;
-		while (toprint[j] != '\0')
-			dest[n++] = toprint[j++];
 	}
 	else if (combi->len > ft_strlen(toprint))
 	{
