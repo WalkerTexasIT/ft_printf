@@ -53,5 +53,3 @@ fclean: clean
 
 re: fclean all
 
-so: $(OBJ) ft_printf.h
-	$(CC) -shared -fPIC -Wl,-soname,ft_printf.so -o ft_printf.so $(OBJ)
