@@ -16,16 +16,7 @@ char	*xutils3(t_flag *combi, char *toprint, int i, int n)
 {
 	char *dest;
 
-	if (combi->len > ft_strlen(toprint) && combi->zero == 1
-								&& combi->p == -1 && combi->m != 1)
-	{
-		if ((dest = ft_malloc_zero(combi->len)) == 0)
-			return (0);
-		n = combi->len - ft_strlen(toprint);
-		while (toprint[i] != '\0')
-			dest[n++] = toprint[i++];
-	}
-	else if (combi->len > ft_strlen(toprint) && combi->m == 1 && combi->p == -1)
+	if (combi->len > ft_strlen(toprint) && combi->m == 1 && combi->p == -1)
 	{
 		if ((dest = ft_malloc_space(combi->len)) == 0)
 			return (0);
@@ -33,6 +24,14 @@ char	*xutils3(t_flag *combi, char *toprint, int i, int n)
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
+	else if (combi->len > ft_strlen(toprint) && combi->p <= ft_strlen(toprint))
+	{
+		if ((dest = xutils2(combi, toprint, i, n)) == 0)
+			return (ft_free(&toprint, 0));
+	}
+	else
+		return (toprint);
+	ft_free(&toprint, 0);
 	return (dest);
 }
 

@@ -49,18 +49,17 @@ char	*xutils4(t_flag *combi, char *toprint, int i, int n)
 		while (toprint[i] != '\0')
 			dest[n++] = toprint[i++];
 	}
-	else if (combi->len > ft_strlen(toprint) && combi->p == -1)
+	else if (combi->len > ft_strlen(toprint) && combi->zero == 1
+							&& combi->p == -1 && combi->m != 1)
 	{
-		if ((dest = xutils3(combi, toprint, i, n)) == 0)
-			return (ft_free(&toprint, 0));
-	}
-	else if (combi->len > ft_strlen(toprint) && combi->p <= ft_strlen(toprint))
-	{
-		if ((dest = xutils2(combi, toprint, i, n)) == 0)
-			return (ft_free(&toprint, 0));
+		if ((dest = ft_malloc_zero(combi->len)) == 0)
+			return (0);
+		n = combi->len - ft_strlen(toprint);
+		while (toprint[i] != '\0')
+			dest[n++] = toprint[i++];
 	}
 	else
-		return (toprint);
+		return (xutils3(combi, toprint, i, n));
 	ft_free(&toprint, 0);
 	return (dest);
 }

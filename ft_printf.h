@@ -69,5 +69,6 @@ char			*uutils1(t_flag *combi, char *toprint, int i, int n);
 char			*prints4(t_flag *combi, char *toprint, int i, int n);
 char			*printlen(t_flag *combi, char *toprint, int n);
 char			*putils1(t_flag *combi, char *toprint, int j, int n);
+int				parser(va_list ap, char const *arg);
 
 #endif

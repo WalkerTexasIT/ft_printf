@@ -56,10 +56,9 @@ char	*dutils(t_flag *combi, char *toprint, int i, int n)
 	}
 	else
 	{
-		if ((dutils0(combi, toprint, i, n)) == 0)
+		if ((dest = dutils0(combi, toprint, i, n)) == 0)
 			return (ft_free(&toprint, 0));
 	}
-	
 	return (dest);
 }
 

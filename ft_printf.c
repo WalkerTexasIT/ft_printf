@@ -99,27 +99,11 @@ int		combi(va_list ap, char const *arg, int *n)
 
 int		ft_printf(char const *arg, ...)
 {
-	int			n;
 	int			ret;
 	va_list		ap;
 
-	n = 0;
-	ret = 0;
 	va_start(ap, arg);
-	while (arg[n] != '\0')
-	{
-		if (arg[n] == '%')
-		{
-			n++;
-			ret += combi(ap, arg, &n);
-			n++;
-		}
-		else
-		{
-			write(1, &arg[n++], 1);
-			ret++;
-		}
-	}
+	ret = parser(ap, arg);
 	va_end(ap);
 	return (ret);
 }
