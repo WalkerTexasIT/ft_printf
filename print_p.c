@@ -6,7 +6,7 @@
 /*   By: bminner <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/16 11:25:03 by bminner           #+#    #+#             */
-/*   Updated: 2020/01/16 11:25:04 by bminner          ###   ########.fr       */
+/*   Updated: 2020/03/04 18:22:54 by bminner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*definetoprint(t_flag *combi, unsigned long long i)
 
 	if (i == 0 && combi->p == -1)
 	{
-		if ((toprint = ft_malloc_zero(2)) == 0)
+		if ((toprint = ft_malloc_zero(3)) == 0)
 			return (0);
 		toprint[0] = '0';
 		toprint[1] = 'x';
@@ -99,6 +99,8 @@ char	*definetoprint(t_flag *combi, unsigned long long i)
 	return (toprint);
 }
 
+#include <stdio.h>
+
 char	*print_pointer(t_flag *combi, unsigned long long i)
 {
 	char	*dest;
@@ -107,6 +109,7 @@ char	*print_pointer(t_flag *combi, unsigned long long i)
 	int		n;
 
 	j = 0;
+//	printf("\n{i = %llx}\n", i);
 	if ((toprint = definetoprint(combi, i)) == 0)
 		return (0);
 	if (combi->p > ft_strlen(toprint) && i != 0 && combi->p > combi->len)
